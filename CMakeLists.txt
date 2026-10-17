@@ -29,8 +29,11 @@ target_include_directories(parallel_image_processing PRIVATE
         ${IMGUI_DIR}/backends
 )
 
+add_subdirectory(external/nfd)
 target_link_libraries(parallel_image_processing PRIVATE
         ${OpenCV_LIBS}
         PkgConfig::GLFW
         OpenGL::GL
+        nfd
 )
+
