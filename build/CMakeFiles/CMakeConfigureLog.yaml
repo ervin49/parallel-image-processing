@@ -1,0 +1,2318 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/wrappers/bin/uname"
+      - "/home/ervin/.local/share/flatpak/exports/bin/uname"
+      - "/var/lib/flatpak/exports/bin/uname"
+      - "/home/ervin/.nix-profile/bin/uname"
+      - "/nix/profile/bin/uname"
+      - "/home/ervin/.local/state/nix/profile/bin/uname"
+      - "/etc/profiles/per-user/ervin/bin/uname"
+      - "/nix/var/nix/profiles/default/bin/uname"
+    found: "/run/current-system/sw/bin/uname"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineSystem.cmake:218 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 6.18.56 - x86_64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MAKE_PROGRAM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gmake"
+      - "make"
+      - "smake"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/wrappers/bin/gmake"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gmake"
+      - "/var/lib/flatpak/exports/bin/gmake"
+      - "/home/ervin/.nix-profile/bin/gmake"
+      - "/nix/profile/bin/gmake"
+      - "/home/ervin/.local/state/nix/profile/bin/gmake"
+      - "/etc/profiles/per-user/ervin/bin/gmake"
+      - "/nix/var/nix/profiles/default/bin/gmake"
+      - "/run/current-system/sw/bin/gmake"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gmake"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gmake"
+      - "/run/wrappers/bin/make"
+      - "/home/ervin/.local/share/flatpak/exports/bin/make"
+      - "/var/lib/flatpak/exports/bin/make"
+      - "/home/ervin/.nix-profile/bin/make"
+      - "/nix/profile/bin/make"
+      - "/home/ervin/.local/state/nix/profile/bin/make"
+      - "/etc/profiles/per-user/ervin/bin/make"
+      - "/nix/var/nix/profiles/default/bin/make"
+    found: "/run/current-system/sw/bin/make"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "c++"
+      - "CC"
+      - "g++"
+      - "aCC"
+      - "cl"
+      - "bcc"
+      - "xlC"
+      - "icpx"
+      - "icx"
+      - "clang++"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/wrappers/bin/c++"
+      - "/home/ervin/.local/share/flatpak/exports/bin/c++"
+      - "/var/lib/flatpak/exports/bin/c++"
+      - "/home/ervin/.nix-profile/bin/c++"
+      - "/nix/profile/bin/c++"
+      - "/home/ervin/.local/state/nix/profile/bin/c++"
+      - "/etc/profiles/per-user/ervin/bin/c++"
+      - "/nix/var/nix/profiles/default/bin/c++"
+    found: "/run/current-system/sw/bin/c++"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:501 (find_file)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:538 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/"
+    found: "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /run/current-system/sw/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/4.4.3/CompilerIdCXX/a.out
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ar"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/ar"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/nm"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/objcopy"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/readelf"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/current-system/sw/bin/dlltool"
+      - "/run/wrappers/bin/dlltool"
+      - "/home/ervin/.local/share/flatpak/exports/bin/dlltool"
+      - "/var/lib/flatpak/exports/bin/dlltool"
+      - "/home/ervin/.nix-profile/bin/dlltool"
+      - "/nix/profile/bin/dlltool"
+      - "/home/ervin/.local/state/nix/profile/bin/dlltool"
+      - "/etc/profiles/per-user/ervin/bin/dlltool"
+      - "/nix/var/nix/profiles/default/bin/dlltool"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/dlltool"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    found: "/run/current-system/sw/bin/addr2line"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeFindBinUtils.cmake:247 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/current-system/sw/bin/tapi"
+      - "/run/wrappers/bin/tapi"
+      - "/home/ervin/.local/share/flatpak/exports/bin/tapi"
+      - "/var/lib/flatpak/exports/bin/tapi"
+      - "/home/ervin/.nix-profile/bin/tapi"
+      - "/nix/profile/bin/tapi"
+      - "/home/ervin/.local/state/nix/profile/bin/tapi"
+      - "/etc/profiles/per-user/ervin/bin/tapi"
+      - "/nix/var/nix/profiles/default/bin/tapi"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/tapi"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/Compiler/GNU-FindBinUtils.cmake:18 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_AR"
+    description: "A wrapper around 'ar' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ar-16.2"
+      - "gcc-ar-16"
+      - "gcc-ar16"
+      - "gcc-ar"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/current-system/sw/bin/gcc-ar-16.2"
+      - "/run/wrappers/bin/gcc-ar-16.2"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ar-16.2"
+      - "/var/lib/flatpak/exports/bin/gcc-ar-16.2"
+      - "/home/ervin/.nix-profile/bin/gcc-ar-16.2"
+      - "/nix/profile/bin/gcc-ar-16.2"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ar-16.2"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ar-16.2"
+      - "/nix/var/nix/profiles/default/bin/gcc-ar-16.2"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ar-16.2"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ar-16.2"
+      - "/run/current-system/sw/bin/gcc-ar-16"
+      - "/run/wrappers/bin/gcc-ar-16"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ar-16"
+      - "/var/lib/flatpak/exports/bin/gcc-ar-16"
+      - "/home/ervin/.nix-profile/bin/gcc-ar-16"
+      - "/nix/profile/bin/gcc-ar-16"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ar-16"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ar-16"
+      - "/nix/var/nix/profiles/default/bin/gcc-ar-16"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ar-16"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ar-16"
+      - "/run/current-system/sw/bin/gcc-ar16"
+      - "/run/wrappers/bin/gcc-ar16"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ar16"
+      - "/var/lib/flatpak/exports/bin/gcc-ar16"
+      - "/home/ervin/.nix-profile/bin/gcc-ar16"
+      - "/nix/profile/bin/gcc-ar16"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ar16"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ar16"
+      - "/nix/var/nix/profiles/default/bin/gcc-ar16"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ar16"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ar16"
+      - "/run/current-system/sw/bin/gcc-ar"
+      - "/run/wrappers/bin/gcc-ar"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ar"
+      - "/var/lib/flatpak/exports/bin/gcc-ar"
+      - "/home/ervin/.nix-profile/bin/gcc-ar"
+      - "/nix/profile/bin/gcc-ar"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ar"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ar"
+      - "/nix/var/nix/profiles/default/bin/gcc-ar"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ar"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ar"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/Compiler/GNU-FindBinUtils.cmake:30 (find_program)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCXXCompiler.cmake:207 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_CXX_COMPILER_RANLIB"
+    description: "A wrapper around 'ranlib' adding the appropriate '--plugin' option for the GCC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "gcc-ranlib-16.2"
+      - "gcc-ranlib-16"
+      - "gcc-ranlib16"
+      - "gcc-ranlib"
+    candidate_directories:
+      - "/run/current-system/sw/bin/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+    searched_directories:
+      - "/run/current-system/sw/bin/gcc-ranlib-16.2"
+      - "/run/wrappers/bin/gcc-ranlib-16.2"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ranlib-16.2"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib-16.2"
+      - "/home/ervin/.nix-profile/bin/gcc-ranlib-16.2"
+      - "/nix/profile/bin/gcc-ranlib-16.2"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ranlib-16.2"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ranlib-16.2"
+      - "/nix/var/nix/profiles/default/bin/gcc-ranlib-16.2"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ranlib-16.2"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ranlib-16.2"
+      - "/run/current-system/sw/bin/gcc-ranlib-16"
+      - "/run/wrappers/bin/gcc-ranlib-16"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ranlib-16"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib-16"
+      - "/home/ervin/.nix-profile/bin/gcc-ranlib-16"
+      - "/nix/profile/bin/gcc-ranlib-16"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ranlib-16"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ranlib-16"
+      - "/nix/var/nix/profiles/default/bin/gcc-ranlib-16"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ranlib-16"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ranlib-16"
+      - "/run/current-system/sw/bin/gcc-ranlib16"
+      - "/run/wrappers/bin/gcc-ranlib16"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ranlib16"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib16"
+      - "/home/ervin/.nix-profile/bin/gcc-ranlib16"
+      - "/nix/profile/bin/gcc-ranlib16"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ranlib16"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ranlib16"
+      - "/nix/var/nix/profiles/default/bin/gcc-ranlib16"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ranlib16"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ranlib16"
+      - "/run/current-system/sw/bin/gcc-ranlib"
+      - "/run/wrappers/bin/gcc-ranlib"
+      - "/home/ervin/.local/share/flatpak/exports/bin/gcc-ranlib"
+      - "/var/lib/flatpak/exports/bin/gcc-ranlib"
+      - "/home/ervin/.nix-profile/bin/gcc-ranlib"
+      - "/nix/profile/bin/gcc-ranlib"
+      - "/home/ervin/.local/state/nix/profile/bin/gcc-ranlib"
+      - "/etc/profiles/per-user/ervin/bin/gcc-ranlib"
+      - "/nix/var/nix/profiles/default/bin/gcc-ranlib"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/gcc-ranlib"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/gcc-ranlib"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:123 (try_compile)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE"
+      binary: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_CXX_STDLIB_MODULES_JSON: ""
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: false
+      stdout: |
+        Change Dir: '/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE'
+        
+        Run Build Command(s): /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/bin/cmake -E env VERBOSE=1 /run/current-system/sw/bin/make -f Makefile cmTC_60caf/fast
+        /run/current-system/sw/bin/make  -f CMakeFiles/cmTC_60caf.dir/build.make CMakeFiles/cmTC_60caf.dir/build
+        make[1]: Entering directory '/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE'
+        Building CXX object CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o
+        /run/current-system/sw/bin/c++   -v -o CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/bin/g++
+        Target: x86_64-unknown-linux-gnu
+        Configured with: ../gcc-16.2.0/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.4.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0/include/c++/16.2.0/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c,c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --enable-default-pie --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 16.2.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/'
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/cc1plus -quiet -v -D_GNU_SOURCE -idirafter /nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include -idirafter /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_60caf.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mno-omit-leaf-frame-pointer -mtls-dialect=gnu2 -mtune=generic -march=x86-64 -version -fno-omit-frame-pointer -o /tmp/ccOLad0G.s
+        GNU C++20 (GCC) version 16.2.0 (x86_64-unknown-linux-gnu)
+        	compiled by GNU C version 16.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.4.1, isl version isl-0.20-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../../x86_64-unknown-linux-gnu/include"
+        ignoring duplicate directory "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+        ignoring duplicate directory "/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//x86_64-unknown-linux-gnu
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//backward
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed
+         /nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include
+        End of search list.
+        Compiler executable checksum: b20406bc474bf91d3cc103e7fb996b37
+        COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/'
+         as -v --64 -o CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccOLad0G.s
+        GNU assembler version 2.46 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.46
+        COMPILER_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/
+        LIBRARY_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../
+        COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_60caf
+        /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60caf.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/bin/g++
+        COLLECT_LTO_WRAPPER=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper
+        Target: x86_64-unknown-linux-gnu
+        Configured with: ../gcc-16.2.0/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.4.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0/include/c++/16.2.0/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c,c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --enable-default-pie --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu
+        Thread model: posix
+        Supported LTO compression algorithms: zlib
+        gcc version 16.2.0 (GCC) 
+        COMPILER_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/
+        LIBRARY_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../
+        COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'cmTC_60caf' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib' '-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60caf.'
+         /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/collect2 -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o
+        collect2 version 16.2.0
+        /nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o
+        GNU ld (GNU Binutils) 2.46
+        COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'cmTC_60caf' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib' '-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60caf.'
+        /run/current-system/sw/bin/c++  -v -Wl,-v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_60caf
+        make[1]: Leaving directory '/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:255 (message)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/]
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//x86_64-unknown-linux-gnu]
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//backward]
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include]
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include]
+          add: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed]
+          add: [/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include]
+        end of search list found
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0]
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//x86_64-unknown-linux-gnu] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/x86_64-unknown-linux-gnu]
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//backward] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/backward]
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include]
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include]
+        collapse include dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed]
+        collapse include dir [/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include] ==> [/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include]
+        implicit include dirs: [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/x86_64-unknown-linux-gnu;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/backward;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed;/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:291 (message)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|wild))("|,| |$)]
+        ignore line: [Change Dir: '/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE']
+        ignore line: []
+        ignore line: [Run Build Command(s): /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/bin/cmake -E env VERBOSE=1 /run/current-system/sw/bin/make -f Makefile cmTC_60caf/fast]
+        ignore line: [/run/current-system/sw/bin/make  -f CMakeFiles/cmTC_60caf.dir/build.make CMakeFiles/cmTC_60caf.dir/build]
+        ignore line: [make[1]: Entering directory '/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/CMakeScratch/TryCompile-IGzGaE']
+        ignore line: [Building CXX object CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/run/current-system/sw/bin/c++   -v -o CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -c /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/bin/g++]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Configured with: ../gcc-16.2.0/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.4.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0/include/c++/16.2.0/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --enable-default-pie --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 16.2.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/']
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/cc1plus -quiet -v -D_GNU_SOURCE -idirafter /nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include -idirafter /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed /nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_60caf.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mno-omit-leaf-frame-pointer -mtls-dialect=gnu2 -mtune=generic -march=x86-64 -version -fno-omit-frame-pointer -o /tmp/ccOLad0G.s]
+        ignore line: [GNU C++20 (GCC) version 16.2.0 (x86_64-unknown-linux-gnu)]
+        ignore line: [	compiled by GNU C version 16.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.4.1  isl version isl-0.20-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../../x86_64-unknown-linux-gnu/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"]
+        ignore line: [ignoring duplicate directory "/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0/]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//x86_64-unknown-linux-gnu]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include/c++/16.2.0//backward]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/include]
+        ignore line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed]
+        ignore line: [ /nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: b20406bc474bf91d3cc103e7fb996b37]
+        ignore line: [COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccOLad0G.s]
+        ignore line: [GNU assembler version 2.46 (x86_64-unknown-linux-gnu) using BFD version (GNU Binutils) 2.46]
+        ignore line: [COMPILER_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_60caf]
+        ignore line: [/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60caf.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/bin/g++]
+        ignore line: [COLLECT_LTO_WRAPPER=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper]
+        ignore line: [Target: x86_64-unknown-linux-gnu]
+        ignore line: [Configured with: ../gcc-16.2.0/configure --prefix=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0 --with-gmp-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0-dev/include --with-gmp-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gmp-6.3.0/lib --with-mpfr-include=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2-dev/include --with-mpfr-lib=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-mpfr-4.2.2/lib --with-mpc=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-libmpc-1.4.1 --with-native-system-header-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-glibc-2.44-25-dev/include --with-build-sysroot=/ --with-gxx-include-dir=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-gcc-16.2.0/include/c++/16.2.0/ --program-prefix= --enable-lto --disable-libstdcxx-pch --without-included-gettext --with-system-zlib --enable-static --enable-languages=c c++ --disable-multilib --enable-plugin --disable-libcc1 --with-isl=/nix/store/eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee-isl-0.20 --disable-bootstrap --enable-default-pie --build=x86_64-unknown-linux-gnu --host=x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib]
+        ignore line: [gcc version 16.2.0 (GCC) ]
+        ignore line: [COMPILER_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/:/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/:/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../../]
+        ignore line: [COLLECT_GCC_OPTIONS='-fno-omit-frame-pointer' '-mno-omit-leaf-frame-pointer' '-mtls-dialect=gnu2' '-v' '-o' 'cmTC_60caf' '-B' '/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/' '-idirafter' '/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include' '-idirafter' '/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/include-fixed' '-B' '/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib' '-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_60caf.']
+        link line: [ /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/collect2 -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o]
+          arg [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccIj8sf1.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-latomic_asneeded] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_60caf] ==> ignore
+          arg [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o] ==> obj [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o]
+          arg [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o] ==> obj [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o]
+          arg [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o] ==> obj [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o]
+          arg [-L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib] ==> dir [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib]
+          arg [-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0] ==> dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0]
+          arg [-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+          arg [-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+          arg [-L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib] ==> dir [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib]
+          arg [-L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+          arg [-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0] ==> dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0]
+          arg [-L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../..] ==> dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../..]
+          arg [-dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2] ==> ignore
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-latomic_asneeded] ==> lib [atomic_asneeded]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o] ==> obj [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o]
+          arg [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o] ==> obj [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o]
+        ignore line: [collect2 version 16.2.0]
+        link line: [/nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o] ==> linker [/nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld]
+        link line: [/nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o] ==> linker architecture flags [-m;elf]
+        ignore line: [/nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld -plugin /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/liblto_plugin.so -plugin-opt=/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/libexec/gcc/x86_64-unknown-linux-gnu/16.2.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccIj8sf1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-latomic_asneeded -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --eh-frame-hdr -m elf_x86_64 -dynamic-linker /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib64/ld-linux-x86-64.so.2 -pie -o cmTC_60caf /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib -L/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0 -L/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../.. -dynamic-linker=/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/ld-linux-x86-64.so.2 -v CMakeFiles/cmTC_60caf.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -latomic_asneeded -lc -lgcc_s -lgcc /nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o /nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o]
+        linker tool for 'CXX': /nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld -m;elf
+        collapse library dir [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib] ==> [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib]
+        collapse library dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0]
+        collapse library dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+        collapse library dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+        collapse library dir [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib] ==> [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib]
+        collapse library dir [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib] ==> [/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib]
+        collapse library dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0]
+        collapse library dir [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/../../..] ==> [/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;atomic_asneeded;c;gcc_s;gcc]
+        implicit objs: [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/Scrt1.o;/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crti.o;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtbeginS.o;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0/crtendS.o;/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/crtn.o]
+        implicit dirs: [/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib/gcc/x86_64-unknown-linux-gnu/16.2.0;/nix/store/j7qx4s4mr17j1wqgvqdzj33lmrnzb387-gcc-16.2.0-lib/lib;/nix/store/5q6bdxkp7lc70gn9mnf4yiybrx8ry5xq-gcc-16.2.0/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/Internal/CMakeDetermineLinkerId.cmake:41 (message)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeDetermineCompilerABI.cmake:337 (cmake_determine_linker_id)"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/nix/store/fy8mxgdjvjvmagv2igmj428a9j17hpcf-binutils-wrapper-2.46/bin/ld" "-v"
+      GNU ld (GNU Binutils) 2.46
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:7 (find_package)"
+    name: "OpenCV"
+    configs:
+      -
+        filename: "OpenCV.cps"
+        kind: "cps"
+      -
+        filename: "opencv.cps"
+        kind: "cps"
+      -
+        filename: "OpenCVConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "opencv-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "OpenCV"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/OpenCVConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/opencv-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/lib64/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/lib64/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/lib/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/lib/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/share/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/CLionProjects/parallel-image-processing/build/CMakeFiles/pkgRedirects/share/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/OpenCVConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/opencv-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/lib64/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/lib64/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/lib/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/lib/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/share/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/run/wrappers/share/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/OpenCVConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/opencv-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/lib64/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/lib64/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/lib/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/lib/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/share/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.local/share/flatpak/exports/share/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/OpenCVConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/opencv-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/lib64/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/lib64/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/lib/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/lib/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/share/cps/OpenCV.cps"
+        mode: "cps"
+        reason: "no_exist"
+      -
+        path: "/home/ervin/.nix-profile/share/cps/opencv.cps"
+        mode: "cps"
+        reason: "no_exist"
+    found:
+      path: "/home/ervin/.nix-profile/lib/cmake/opencv4/OpenCVConfig.cmake"
+      mode: "config"
+      version: "4.13.0"
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:403 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GL/gl.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GL/gl.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GL/gl.h"
+      - "/var/lib/flatpak/exports/bin/GL/gl.h"
+      - "/home/ervin/.nix-profile/bin/GL/gl.h"
+      - "/nix/profile/bin/GL/gl.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GL/gl.h"
+      - "/etc/profiles/per-user/ervin/bin/GL/gl.h"
+      - "/nix/var/nix/profiles/default/bin/GL/gl.h"
+      - "/run/current-system/sw/bin/GL/gl.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GL/gl.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GL/gl.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GL/gl.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GL/gl.h"
+      - "/usr/local/include/GL/gl.h"
+      - "/usr/local/GL/gl.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GL/gl.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:406 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_GLX_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GL/glx.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GL/glx.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GL/glx.h"
+      - "/var/lib/flatpak/exports/bin/GL/glx.h"
+      - "/home/ervin/.nix-profile/bin/GL/glx.h"
+      - "/nix/profile/bin/GL/glx.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GL/glx.h"
+      - "/etc/profiles/per-user/ervin/bin/GL/glx.h"
+      - "/nix/var/nix/profiles/default/bin/GL/glx.h"
+      - "/run/current-system/sw/bin/GL/glx.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GL/glx.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GL/glx.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GL/glx.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GL/glx.h"
+      - "/usr/local/include/GL/glx.h"
+      - "/usr/local/GL/glx.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GL/glx.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:407 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_EGL_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "EGL/egl.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/EGL/egl.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/EGL/egl.h"
+      - "/var/lib/flatpak/exports/bin/EGL/egl.h"
+      - "/home/ervin/.nix-profile/bin/EGL/egl.h"
+      - "/nix/profile/bin/EGL/egl.h"
+      - "/home/ervin/.local/state/nix/profile/bin/EGL/egl.h"
+      - "/etc/profiles/per-user/ervin/bin/EGL/egl.h"
+      - "/nix/var/nix/profiles/default/bin/EGL/egl.h"
+      - "/run/current-system/sw/bin/EGL/egl.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/EGL/egl.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/EGL/egl.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/EGL/egl.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/EGL/egl.h"
+      - "/usr/local/include/EGL/egl.h"
+      - "/usr/local/EGL/egl.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/EGL/egl.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:408 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_GLES2_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLES2/gl2.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GLES2/gl2.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GLES2/gl2.h"
+      - "/var/lib/flatpak/exports/bin/GLES2/gl2.h"
+      - "/home/ervin/.nix-profile/bin/GLES2/gl2.h"
+      - "/nix/profile/bin/GLES2/gl2.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GLES2/gl2.h"
+      - "/etc/profiles/per-user/ervin/bin/GLES2/gl2.h"
+      - "/nix/var/nix/profiles/default/bin/GLES2/gl2.h"
+      - "/run/current-system/sw/bin/GLES2/gl2.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GLES2/gl2.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GLES2/gl2.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GLES2/gl2.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GLES2/gl2.h"
+      - "/usr/local/include/GLES2/gl2.h"
+      - "/usr/local/GLES2/gl2.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GLES2/gl2.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:409 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_GLES3_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLES3/gl3.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GLES3/gl3.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GLES3/gl3.h"
+      - "/var/lib/flatpak/exports/bin/GLES3/gl3.h"
+      - "/home/ervin/.nix-profile/bin/GLES3/gl3.h"
+      - "/nix/profile/bin/GLES3/gl3.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GLES3/gl3.h"
+      - "/etc/profiles/per-user/ervin/bin/GLES3/gl3.h"
+      - "/nix/var/nix/profiles/default/bin/GLES3/gl3.h"
+      - "/run/current-system/sw/bin/GLES3/gl3.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GLES3/gl3.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GLES3/gl3.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GLES3/gl3.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GLES3/gl3.h"
+      - "/usr/local/include/GLES3/gl3.h"
+      - "/usr/local/GLES3/gl3.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GLES3/gl3.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:410 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_xmesa_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GL/xmesa.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GL/xmesa.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GL/xmesa.h"
+      - "/var/lib/flatpak/exports/bin/GL/xmesa.h"
+      - "/home/ervin/.nix-profile/bin/GL/xmesa.h"
+      - "/nix/profile/bin/GL/xmesa.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GL/xmesa.h"
+      - "/etc/profiles/per-user/ervin/bin/GL/xmesa.h"
+      - "/nix/var/nix/profiles/default/bin/GL/xmesa.h"
+      - "/run/current-system/sw/bin/GL/xmesa.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GL/xmesa.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GL/xmesa.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GL/xmesa.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GL/xmesa.h"
+      - "/usr/local/include/GL/xmesa.h"
+      - "/usr/local/GL/xmesa.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GL/xmesa.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:413 (find_path)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "path"
+    variable: "OPENGL_GLU_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GL/glu.h"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/var/lib/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/nix/profile/bin/"
+      - "/home/ervin/.local/state/nix/profile/bin/"
+      - "/etc/profiles/per-user/ervin/bin/"
+      - "/nix/var/nix/profiles/default/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/usr/local/include/"
+      - "/usr/local/"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/"
+    searched_directories:
+      - "/run/wrappers/bin/GL/glu.h"
+      - "/home/ervin/.local/share/flatpak/exports/bin/GL/glu.h"
+      - "/var/lib/flatpak/exports/bin/GL/glu.h"
+      - "/home/ervin/.nix-profile/bin/GL/glu.h"
+      - "/nix/profile/bin/GL/glu.h"
+      - "/home/ervin/.local/state/nix/profile/bin/GL/glu.h"
+      - "/etc/profiles/per-user/ervin/bin/GL/glu.h"
+      - "/nix/var/nix/profiles/default/bin/GL/glu.h"
+      - "/run/current-system/sw/bin/GL/glu.h"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/GL/glu.h"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/GL/glu.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/include/GL/glu.h"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/GL/glu.h"
+      - "/usr/local/include/GL/glu.h"
+      - "/usr/local/GL/glu.h"
+      - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include/GL/glu.h"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_INCLUDE_PATH:
+        - "/nix/store/m38wglsqnh1mrmj2cmqa3pjb6w4yjxdi-glibc-2.44-25-dev/include"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:427 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_opengl_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "OpenGL"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:432 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_glx_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLX"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:438 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_egl_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "EGL"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:444 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_gles2_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLESv2"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:449 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_gles3_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLESv3"
+      - "GLESv2"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:455 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_glu_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GLU"
+      - "MesaGLU"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/share/cmake-4.4/Modules/FindOpenGL.cmake:507 (find_library)"
+      - "CMakeLists.txt:8 (find_package)"
+    mode: "library"
+    variable: "OPENGL_gl_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "GL"
+      - "MesaGL"
+    candidate_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    searched_directories:
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+      - "/run/wrappers/bin/"
+      - "/home/ervin/.local/share/flatpak/exports/bin/"
+      - "/home/ervin/.nix-profile/bin/"
+      - "/run/current-system/sw/bin/"
+      - "/home/ervin/.local/share/JetBrains/Toolbox/scripts/"
+      - "/home/ervin/.config/zsh/plugins/powerlevel10k/"
+      - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3/"
+      - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib/"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/run/wrappers/bin"
+        - "/home/ervin/.local/share/flatpak/exports/bin"
+        - "/var/lib/flatpak/exports/bin"
+        - "/home/ervin/.nix-profile/bin"
+        - "/nix/profile/bin"
+        - "/home/ervin/.local/state/nix/profile/bin"
+        - "/etc/profiles/per-user/ervin/bin"
+        - "/nix/var/nix/profiles/default/bin"
+        - "/run/current-system/sw/bin"
+        - "/home/ervin/.local/share/JetBrains/Toolbox/scripts"
+        - "/home/ervin/.config/zsh/plugins/powerlevel10k"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "/nix/store/jcvvpih1046akxcwh9hdiak5q24jqcf0-cmake-4.4.3"
+        - "/usr/local"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "/nix/store/h4wfwic161kxrr74jlzla5lsm28hgary-glibc-2.44-25/lib"
+...

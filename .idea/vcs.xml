@@ -4,5 +4,6 @@
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/external/imgui" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/external/nfd" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/external/nfd/3ps/wayland-protocols" vcs="Git" />
   </component>
 </project>

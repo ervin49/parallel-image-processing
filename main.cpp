@@ -6,6 +6,7 @@
 
 #include <GLFW/glfw3.h>
 #include "external/nfd/src/include/nfd.h"
+#include <opencv2/opencv.hpp>
 
 int main()
 {
@@ -47,6 +48,15 @@ int main()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        const ImGuiIO& io = ImGui::GetIO();
+        ImFont* font = io.Fonts->AddFontFromFileTTF("../external/assets/fonts/ARIAL.TTF");
+        ImGui::PushFont(font);
+        ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x,io.DisplaySize.y));
+        bool open = true;
+        ImGui::SetNextWindowPos(ImVec2(0.0f,ImGui::GetFrameHeight()));
+        ImGui::Begin("Parallel Image Processing",&open,
+            ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
+        ImGui::Text("Hello, ImGui!");
         if (ImGui::BeginMainMenuBar())
         {
             if (ImGui::BeginMenu("File"))
@@ -54,15 +64,15 @@ int main()
                 if (ImGui::MenuItem("Open", "Ctrl+O")) {
                     NFD_Init();
                     nfdu8char_t *outPath;
-                    nfdu8filteritem_t filters[2] = { { "Source code", "c,cpp,cc" }, { "Headers", "h,hpp" } };
-                    nfdopendialogu8args_t args = {0};
+                    constexpr nfdu8filteritem_t filters[1] = { { .name = "Images", .spec = "png,jpg,jpeg,bmp,tiff" }};
+                    nfdopendialogu8args_t args = {.filterList = nullptr};
                     args.filterList = filters;
-                    args.filterCount = 2;
-                    nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
+                    args.filterCount = 1;
+                    const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
                     if (result == NFD_OKAY)
                     {
-                        puts("Success!");
-                        puts(outPath);
+                        cv::Mat img = cv::imread(outPath);
+                        cv::imshow("Image",img);
                         NFD_FreePathU8(outPath);
                     }
                     else if (result == NFD_CANCEL)
@@ -80,10 +90,9 @@ int main()
             }
             ImGui::EndMainMenuBar();
         }
-        ImGui::Begin("Parallel Image Processing");
-        ImGui::Text("Hello, ImGui!");
+        
+        ImGui::PopFont();
         ImGui::End();
-
         ImGui::Render();
 
         int width, height;
