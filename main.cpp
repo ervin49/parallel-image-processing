@@ -40,6 +40,11 @@ int main()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
+    bool cpuCheck = true, gpuCheck = false;
+    const ImGuiIO& io = ImGui::GetIO();
+    ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
+    cv::Mat img;
+    GLuint texture = 0;
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -47,10 +52,8 @@ int main()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
-        const ImGuiIO& io = ImGui::GetIO();
-        ImFont* font = io.Fonts->AddFontFromFileTTF("../external/assets/fonts/ARIAL.TTF");
         ImGui::PushFont(font);
+
         ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x,io.DisplaySize.y));
         bool open = true;
         ImGui::SetNextWindowPos(ImVec2(0.0f,ImGui::GetFrameHeight()));
@@ -71,9 +74,27 @@ int main()
                     const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
                     if (result == NFD_OKAY)
                     {
-                        cv::Mat img = cv::imread(outPath);
-                        cv::imshow("Image",img);
-                        NFD_FreePathU8(outPath);
+                        img = cv::imread(outPath);
+                        if (!img.empty())
+                        {
+                            cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
+                            if (texture != 0)
+                            {
+                                glDeleteTextures(1,&texture);
+                            }
+
+                            glGenTextures( 1, &texture );
+                            glBindTexture( GL_TEXTURE_2D, texture );
+
+                            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+                            glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+
+                            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB,
+                                img.cols, img.rows, 0,
+                                GL_RGB, GL_UNSIGNED_BYTE, img.data
+                                );
+                        }
+                            NFD_FreePathU8(outPath);
                     }
                     else if (result == NFD_CANCEL)
                     {
@@ -88,7 +109,36 @@ int main()
                 }
                 ImGui::EndMenu();
             }
+            if (ImGui::BeginMenu("Change Architecture"))
+            {
+                if (ImGui::Checkbox("CPU", &cpuCheck)) {
+                    if (!cpuCheck)
+                    {
+                        cpuCheck = true;
+                    }
+                    gpuCheck = false;
+                }
+                if (ImGui::Checkbox("GPU",&gpuCheck)) {
+                    if (!gpuCheck)
+                    {
+                        gpuCheck = true;
+                    }
+                    cpuCheck = false;
+                }
+                ImGui::EndMenu();
+            }
             ImGui::EndMainMenuBar();
+        }
+        if (!img.empty())
+        {
+            ImGui::Begin("Image");
+
+            ImGui::Image(
+                static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
+                ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows))
+            );
+
+            ImGui::End();
         }
         
         ImGui::PopFont();
@@ -110,6 +160,10 @@ int main()
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
+    if (texture != 0)
+    {
+        glDeleteTextures(1, &texture);
+    }
     glfwDestroyWindow(window);
     glfwTerminate();
 

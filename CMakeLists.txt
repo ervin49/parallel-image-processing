@@ -1,10 +1,17 @@
+
 cmake_minimum_required(VERSION 3.20)
 project(parallel_image_processing LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(OpenCV REQUIRED)
+find_package(OpenCV REQUIRED COMPONENTS
+    core
+    imgproc
+    imgcodecs
+    highgui
+)
 find_package(OpenGL REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GLFW REQUIRED IMPORTED_TARGET glfw3)
@@ -23,6 +30,10 @@ add_executable(parallel_image_processing
         ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
 )
 
+target_compile_definitions(parallel_image_processing PRIVATE
+    ASSETS_DIR="${CMAKE_SOURCE_DIR}/external/assets"
+)
+
 target_include_directories(parallel_image_processing PRIVATE
         ${OpenCV_INCLUDE_DIRS}
         ${IMGUI_DIR}
@@ -30,10 +41,11 @@ target_include_directories(parallel_image_processing PRIVATE
 )
 
 add_subdirectory(external/nfd)
+
 target_link_libraries(parallel_image_processing PRIVATE
         ${OpenCV_LIBS}
         PkgConfig::GLFW
         OpenGL::GL
         nfd
+        stdc++
 )
-
