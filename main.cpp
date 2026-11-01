@@ -54,7 +54,12 @@ int main()
         ImGui::SetNextWindowPos(ImVec2(0.0f, ImGui::GetFrameHeight()));
         ImGui::Begin("Parallel Image Processing", &open,
                      ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-        ImGui::Text("Hello, ImGui!");
+        if (img.empty())
+        {
+            ImGui::Text("No image loaded");
+            ImGui::Text("Open an image to start processing.");
+            ImGui::Button("Open Image");
+        }
         if (ImGui::BeginMainMenuBar())
         {
             if (ImGui::BeginMenu("File"))
@@ -101,23 +106,49 @@ int main()
 
                     NFD_Quit();
                 }
+                if (ImGui::MenuItem("Save", "Ctrl+S"))
+                {
+                }
+                if (ImGui::MenuItem("Export"))
+                {
+                }
+                if (ImGui::MenuItem("Exit"))
+                {
+                    exit(0);
+                }
                 ImGui::EndMenu();
             }
-            if (ImGui::BeginMenu("Change Architecture"))
+            if (ImGui::BeginMenu("Edit"))
             {
-                if (ImGui::MenuItem("CPU", nullptr, &cpuCheck))
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Image"))
+            {
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Processing"))
+            {
+                if (ImGui::MenuItem("CPU Mode", nullptr, &cpuCheck))
                 {
                     cpuCheck = true;
                     gpuCheck = false;
                 }
-                if (ImGui::MenuItem("GPU", nullptr, &gpuCheck))
+                if (ImGui::MenuItem("GPU Mode", nullptr, &gpuCheck))
                 {
                     gpuCheck = true;
                     cpuCheck = false;
                 }
                 ImGui::EndMenu();
             }
-            if (ImGui::BeginMenu("Apply Filter"))
+            if (ImGui::BeginMenu("View"))
+            {
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Help"))
+            {
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Filters"))
             {
                 if (ImGui::MenuItem("Grayscale"))
                 {
@@ -170,16 +201,16 @@ int main()
 
         glfwSwapBuffers(window);
     }
-        ImGui_ImplOpenGL3_Shutdown();
-        ImGui_ImplGlfw_Shutdown();
-        ImGui::DestroyContext();
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
-        if (texture != 0)
-        {
-            glDeleteTextures(1, &texture);
-        }
-        glfwDestroyWindow(window);
-        glfwTerminate();
+    if (texture != 0)
+    {
+        glDeleteTextures(1, &texture);
+    }
+    glfwDestroyWindow(window);
+    glfwTerminate();
 
     return 0;
 }

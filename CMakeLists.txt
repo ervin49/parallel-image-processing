@@ -28,6 +28,8 @@ add_executable(parallel_image_processing
 
         ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
         ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+        main.cpp
+        main.cpp
 )
 
 target_compile_definitions(parallel_image_processing PRIVATE
