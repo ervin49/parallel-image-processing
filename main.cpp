@@ -106,12 +106,16 @@ int main()
 
                     NFD_Quit();
                 }
+                ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
                 {
                 }
+                ImGui::EndDisabled();
+                ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Export"))
                 {
                 }
+                ImGui::EndDisabled();
                 if (ImGui::MenuItem("Exit"))
                 {
                     exit(0);
