@@ -110,7 +110,7 @@ int main()
             ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 ));
             ImGui::Text("Open an image to start processing.");
             fontSize = ImGui::CalcTextSize("Open Image").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f, ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 14.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 6.0f));
             ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
@@ -208,6 +208,17 @@ int main()
         if (!img.empty())
         {
             bool is_open = true;
+
+            //sidebar
+            const float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.3f;
+            ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg,ImVec4(0.145f,0.145f,0.149f,1.0f));
+            ImGui::Begin("Sidebar", &is_open, ImGuiWindowFlags_NoTitleBar);
+            ImGui::Text("sidebar");
+            ImGui::End();
+            ImGui::PopStyleColor(1);
+
+            //image view
             ImGui::Begin("Image", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
