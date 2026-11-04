@@ -84,6 +84,7 @@ int main()
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
     cv::Mat img;
     GLuint texture = 0;
+    float mainMenuBarHeight = 0;
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
@@ -125,6 +126,7 @@ int main()
         }
         if (ImGui::BeginMainMenuBar())
         {
+            mainMenuBarHeight = ImGui::GetWindowSize().y;
             if (ImGui::BeginMenu("File"))
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
@@ -210,16 +212,20 @@ int main()
             bool is_open = true;
 
             //sidebar
-            const float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.3f;
+            float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
+            sidebarWidth = std::clamp(sidebarWidth,200.0f,300.0f);
             ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
+            ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, 0));
             ImGui::PushStyleColor(ImGuiCol_WindowBg,ImVec4(0.145f,0.145f,0.149f,1.0f));
-            ImGui::Begin("Sidebar", &is_open, ImGuiWindowFlags_NoTitleBar);
+            ImGui::SetNextWindowFocus();
+            ImGui::Begin("Sidebar", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
             ImGui::Text("sidebar");
             ImGui::End();
             ImGui::PopStyleColor(1);
 
             //image view
-            ImGui::Begin("Image", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+            ImGui::SetNextWindowSize(ImVec2());
+            ImGui::Begin("Image", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                          ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
