@@ -6,12 +6,12 @@
 
 #include <GLFW/glfw3.h>
 #include <opencv2/opencv.hpp>
+
 #include "external/nfd/src/include/nfd.h"
+#include "imgui_internal.h"
 
-void openImage(cv::Mat& img, GLuint& texture)
+void displayImage(cv::Mat& img, GLuint& texture)
 {
-
-    NFD_Init();
     nfdu8char_t* outPath;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
     nfdopendialogu8args_t args = {.filterList = nullptr};
@@ -35,8 +35,8 @@ void openImage(cv::Mat& img, GLuint& texture)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.cols, img.rows, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                         img.data);
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.cols, img.rows, 0, GL_RGB, GL_UNSIGNED_BYTE, img.data);
         }
         NFD_FreePathU8(outPath);
     }
@@ -48,12 +48,11 @@ void openImage(cv::Mat& img, GLuint& texture)
     {
         printf("Error: %s\n", NFD_GetError());
     }
-
-    NFD_Quit();
 }
 
 int main()
 {
+    NFD_Init();
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 
     if (!glfwInit())
@@ -75,7 +74,6 @@ int main()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
-
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
@@ -84,6 +82,23 @@ int main()
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
     cv::Mat img;
     GLuint texture = 0;
+    GLuint sidebarTexture = 0;
+    glGenTextures(1, &sidebarTexture);
+    glBindTexture(GL_TEXTURE_2D, sidebarTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    const cv::Mat sidebarToggleIcon = cv::imread("../external/assets/hide-sidebar-icon.png", cv::IMREAD_UNCHANGED);
+
+    if (!sidebarToggleIcon.empty())
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sidebarToggleIcon.cols, sidebarToggleIcon.rows, 0, GL_BGRA,
+                     GL_UNSIGNED_BYTE, sidebarToggleIcon.data);
+    }
+
+
+    bool isSidebarOpen = true;
+    bool isImageOpen = true;
     float mainMenuBarHeight = 0;
     while (!glfwWindowShouldClose(window))
     {
@@ -91,7 +106,7 @@ int main()
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-        ImGui::PushStyleColor(ImGuiCol_WindowBg,ImVec4(0.11f,0.11f,0.11f,1.0f));
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.11f, 0.11f, 0.11f, 1.0f));
         ImGui::NewFrame();
         ImGui::PushFont(font);
 
@@ -105,33 +120,38 @@ int main()
         {
             float fontHeight = ImGui::GetTextLineHeight();
             float fontSize = ImGui::CalcTextSize("No image loaded").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 - fontHeight * 1.5f));
+            ImGui::SetCursorPos(
+                ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 - fontHeight * 1.5f));
             ImGui::Text("No image loaded");
             fontSize = ImGui::CalcTextSize("Open an image to start processing").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 ));
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2));
             ImGui::Text("Open an image to start processing.");
             fontSize = ImGui::CalcTextSize("Open Image").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f, ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f,
+                                       ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 14.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 6.0f));
-            ImGui::PushStyleColor(ImGuiCol_Button,        ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered,        ImVec4(0.35f, 0.35f, 0.35f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive,        ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.35f, 0.35f, 0.35f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
             if (ImGui::Button("Open Image"))
             {
-                openImage(img, texture);
+                displayImage(img, texture);
             }
             ImGui::PopStyleVar(2);
             ImGui::PopStyleColor(3);
         }
+
         if (ImGui::BeginMainMenuBar())
         {
             mainMenuBarHeight = ImGui::GetWindowSize().y;
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered,ImVec4(0.35f,0.35f,0.35f,1));
+            ImGui::PushStyleColor(ImGuiCol_HeaderActive,ImVec4(0.45f,0.45f,0.45f,1));
             if (ImGui::BeginMenu("File"))
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
                 {
-                    openImage(img, texture);
+                    displayImage(img, texture);
                 }
                 ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
@@ -145,7 +165,7 @@ int main()
                 ImGui::EndDisabled();
                 if (ImGui::MenuItem("Exit"))
                 {
-                    exit(0);
+                    glfwSetWindowShouldClose(window, GLFW_TRUE);
                 }
                 ImGui::EndMenu();
             }
@@ -177,55 +197,67 @@ int main()
             }
             if (ImGui::BeginMenu("Help"))
             {
-                ImGui::EndMenu();
-            }
-            if (ImGui::BeginMenu("Filters"))
-            {
-                if (ImGui::MenuItem("Grayscale"))
+                if (ImGui::MenuItem("About"))
                 {
-                    if (!img.empty())
-                    {
-                        cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
-                        if (texture != 0)
-                        {
-                            glDeleteTextures(1, &texture);
-                        }
-
-                        glGenTextures(1, &texture);
-                        glBindTexture(GL_TEXTURE_2D, texture);
-
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-                        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
-                                     img.data);
-                    }
                 }
                 ImGui::EndMenu();
+            }
+            ImGui::PopStyleColor(2);
+
+            if (!img.empty())
+            {
+                ImGui::SetCursorPosX(ImGui::GetCurrentWindow()->Size.x - 30);
+                ImGui::PushStyleColor(ImGuiCol_Button,ImVec4(0,0,0,0));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered,ImVec4(0.35f,0.35f,0.35f,1));
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive,ImVec4(0.45f,0.45f,0.45f,1));
+                if (ImGui::ImageButton("sidebar_toggle",
+                                       static_cast<ImTextureID>(static_cast<intptr_t>(sidebarTexture)), ImVec2(20, 20)))
+                {
+                    isSidebarOpen = !isSidebarOpen;
+                }
+                ImGui::PopStyleColor(3);
             }
             ImGui::EndMainMenuBar();
         }
         if (!img.empty())
         {
-            bool is_open = true;
-
-            //sidebar
+            // sidebar
             float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
-            sidebarWidth = std::clamp(sidebarWidth,200.0f,300.0f);
+            sidebarWidth = std::clamp(sidebarWidth, 200.0f, 250.0f);
             ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
-            ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, 0));
-            ImGui::PushStyleColor(ImGuiCol_WindowBg,ImVec4(0.145f,0.145f,0.149f,1.0f));
+            ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, mainMenuBarHeight));
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
             ImGui::SetNextWindowFocus();
-            ImGui::Begin("Sidebar", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-            ImGui::Text("sidebar");
+            ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+            ImGui::Text("Adjustments Filters");
+            if (ImGui::MenuItem("Grayscale"))
+            {
+                if (!img.empty())
+                {
+                    cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
+                    if (texture != 0)
+                    {
+                        glDeleteTextures(1, &texture);
+                    }
+
+                    glGenTextures(1, &texture);
+                    glBindTexture(GL_TEXTURE_2D, texture);
+
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+                    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE, img.data);
+                }
+            }
             ImGui::End();
             ImGui::PopStyleColor(1);
 
-            //image view
+            // image view
             ImGui::SetNextWindowSize(ImVec2());
-            ImGui::Begin("Image", &is_open, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
+            ImGui::Begin("Image", &isImageOpen,
+                         ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
 
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                          ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
@@ -256,8 +288,13 @@ int main()
     {
         glDeleteTextures(1, &texture);
     }
+    if (sidebarTexture)
+    {
+        glDeleteTextures(1, &sidebarTexture);
+    }
     glfwDestroyWindow(window);
     glfwTerminate();
 
+    NFD_Quit();
     return 0;
 }
