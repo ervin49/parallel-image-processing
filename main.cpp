@@ -112,36 +112,6 @@ int main()
 
         ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y));
         bool open = true;
-        ImGui::SetNextWindowPos(ImVec2(0.0f, ImGui::GetFrameHeight()));
-        ImGui::Begin("Parallel Image Processing", &open,
-                     ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-
-        if (img.empty())
-        {
-            float fontHeight = ImGui::GetTextLineHeight();
-            float fontSize = ImGui::CalcTextSize("No image loaded").x;
-            ImGui::SetCursorPos(
-                ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 - fontHeight * 1.5f));
-            ImGui::Text("No image loaded");
-            fontSize = ImGui::CalcTextSize("Open an image to start processing").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2));
-            ImGui::Text("Open an image to start processing.");
-            fontSize = ImGui::CalcTextSize("Open Image").x;
-            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f,
-                                       ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
-            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 14.0f);
-            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 6.0f));
-            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.35f, 0.35f, 0.35f, 1.0f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
-            if (ImGui::Button("Open Image"))
-            {
-                displayImage(img, texture);
-            }
-            ImGui::PopStyleVar(2);
-            ImGui::PopStyleColor(3);
-        }
-
         if (ImGui::BeginMainMenuBar())
         {
             mainMenuBarHeight = ImGui::GetWindowSize().y;
@@ -214,55 +184,87 @@ int main()
                                        static_cast<ImTextureID>(static_cast<intptr_t>(sidebarTexture)), ImVec2(20, 20)))
                 {
                     isSidebarOpen = !isSidebarOpen;
+                    std::cout<<"apasat, devenit: "<<isSidebarOpen;
                 }
                 ImGui::PopStyleColor(3);
             }
             ImGui::EndMainMenuBar();
         }
+        ImGui::SetNextWindowPos(ImVec2(0.0f, mainMenuBarHeight));
+        ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y - mainMenuBarHeight));
+        ImGui::Begin("Parallel Image Processing", &open,
+                     ImGuiWindowFlags_NoCollapse |
+                     ImGuiWindowFlags_NoResize |
+                     ImGuiWindowFlags_NoTitleBar |
+                     ImGuiWindowFlags_NoBringToFrontOnFocus);
+
+        if (img.empty())
+        {
+            float fontHeight = ImGui::GetTextLineHeight();
+            float fontSize = ImGui::CalcTextSize("No image loaded").x;
+            ImGui::SetCursorPos(
+                ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 - fontHeight * 1.5f));
+            ImGui::Text("No image loaded");
+            fontSize = ImGui::CalcTextSize("Open an image to start processing").x;
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2));
+            ImGui::Text("Open an image to start processing.");
+            fontSize = ImGui::CalcTextSize("Open Image").x;
+            ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f,
+                                       ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 14.0f);
+            ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(8.0f, 6.0f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.25f, 0.25f, 0.25f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.35f, 0.35f, 0.35f, 1.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
+            if (ImGui::Button("Open Image"))
+            {
+                displayImage(img, texture);
+            }
+            ImGui::PopStyleVar(2);
+            ImGui::PopStyleColor(3);
+        }
+
         if (!img.empty())
         {
             // sidebar
-            float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
-            sidebarWidth = std::clamp(sidebarWidth, 200.0f, 250.0f);
-            ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
-            ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, mainMenuBarHeight));
-            ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
-            ImGui::SetNextWindowFocus();
-            ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-            ImGui::Text("Adjustments Filters");
-            if (ImGui::MenuItem("Grayscale"))
+            if (isSidebarOpen)
             {
-                if (!img.empty())
+                float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
+                sidebarWidth = std::clamp(sidebarWidth, 200.0f, 250.0f);
+                ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
+                ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, mainMenuBarHeight));
+                ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
+                ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
+                ImGui::Text("Adjustments Filters");
+                if (ImGui::MenuItem("Grayscale"))
                 {
-                    cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
-                    if (texture != 0)
+                    if (!img.empty())
                     {
-                        glDeleteTextures(1, &texture);
+                        cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
+                        if (texture != 0)
+                        {
+                            glDeleteTextures(1, &texture);
+                        }
+
+                        glGenTextures(1, &texture);
+                        glBindTexture(GL_TEXTURE_2D, texture);
+
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
+                        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+
+                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE, img.data);
                     }
-
-                    glGenTextures(1, &texture);
-                    glBindTexture(GL_TEXTURE_2D, texture);
-
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-                    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-                    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-
-                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE, img.data);
                 }
+                ImGui::End();
+                ImGui::PopStyleColor(1);
             }
-            ImGui::End();
-            ImGui::PopStyleColor(1);
 
             // image view
-            ImGui::SetNextWindowSize(ImVec2());
-            ImGui::Begin("Image", &isImageOpen,
-                         ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove);
-
+            ImGui::SetCursorPos(ImVec2(10.0f,10.0f));
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                          ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
-
-            ImGui::End();
         }
 
         ImGui::PopFont();
