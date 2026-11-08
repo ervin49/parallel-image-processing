@@ -24,6 +24,7 @@ void displayImage(cv::Mat& img, GLuint& texture)
         if (!img.empty())
         {
             cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
+
             if (texture != 0)
             {
                 glDeleteTextures(1, &texture);
@@ -115,8 +116,8 @@ int main()
         if (ImGui::BeginMainMenuBar())
         {
             mainMenuBarHeight = ImGui::GetWindowSize().y;
-            ImGui::PushStyleColor(ImGuiCol_HeaderHovered,ImVec4(0.35f,0.35f,0.35f,1));
-            ImGui::PushStyleColor(ImGuiCol_HeaderActive,ImVec4(0.45f,0.45f,0.45f,1));
+            ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.35f, 0.35f, 0.35f, 1));
+            ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.45f, 0.45f, 0.45f, 1));
             if (ImGui::BeginMenu("File"))
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
@@ -177,14 +178,14 @@ int main()
             if (!img.empty())
             {
                 ImGui::SetCursorPosX(ImGui::GetCurrentWindow()->Size.x - 30);
-                ImGui::PushStyleColor(ImGuiCol_Button,ImVec4(0,0,0,0));
-                ImGui::PushStyleColor(ImGuiCol_ButtonHovered,ImVec4(0.35f,0.35f,0.35f,1));
-                ImGui::PushStyleColor(ImGuiCol_ButtonActive,ImVec4(0.45f,0.45f,0.45f,1));
+                ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+                ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.35f, 0.35f, 0.35f, 1));
+                ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1));
                 if (ImGui::ImageButton("sidebar_toggle",
                                        static_cast<ImTextureID>(static_cast<intptr_t>(sidebarTexture)), ImVec2(20, 20)))
                 {
                     isSidebarOpen = !isSidebarOpen;
-                    std::cout<<"apasat, devenit: "<<isSidebarOpen;
+                    std::cout << "apasat, devenit: " << isSidebarOpen;
                 }
                 ImGui::PopStyleColor(3);
             }
@@ -193,10 +194,8 @@ int main()
         ImGui::SetNextWindowPos(ImVec2(0.0f, mainMenuBarHeight));
         ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y - mainMenuBarHeight));
         ImGui::Begin("Parallel Image Processing", &open,
-                     ImGuiWindowFlags_NoCollapse |
-                     ImGuiWindowFlags_NoResize |
-                     ImGuiWindowFlags_NoTitleBar |
-                     ImGuiWindowFlags_NoBringToFrontOnFocus);
+                     ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar |
+                         ImGuiWindowFlags_NoBringToFrontOnFocus);
 
         if (img.empty())
         {
@@ -240,7 +239,14 @@ int main()
                 {
                     if (!img.empty())
                     {
-                        cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
+                        if (img.channels() == 3)
+                        {
+                            cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
+                        } else if (img.channels() == 4)
+                        {
+                            cv::cvtColor(img, img, cv::COLOR_RGBA2GRAY);
+                        }
+
                         if (texture != 0)
                         {
                             glDeleteTextures(1, &texture);
@@ -253,8 +259,8 @@ int main()
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
                         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE, img.data);
+                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
+                                     img.data);
                     }
                 }
                 ImGui::End();
@@ -262,7 +268,7 @@ int main()
             }
 
             // image view
-            ImGui::SetCursorPos(ImVec2(10.0f,10.0f));
+            ImGui::SetCursorPos(ImVec2(10.0f, 10.0f));
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                          ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
         }
