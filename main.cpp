@@ -1,53 +1,67 @@
+#include <GLFW/glfw3.h>
+#include <chrono>
 #include <iostream>
+#include <opencv2/opencv.hpp>
 
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
-#include "imgui.h"
-
-#include <GLFW/glfw3.h>
-#include <opencv2/opencv.hpp>
-
 #include "external/nfd/src/include/nfd.h"
+#include "imgui.h"
 #include "imgui_internal.h"
 
+cv::Mat original;
+void uploadTexture(const cv::Mat& m, GLuint& texture)
+{
+    const cv::Mat src = m.isContinuous() ? m : m.clone();
+
+    if (texture != 0)
+        glDeleteTextures(1, &texture);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    if (src.channels() == 1)
+    {
+        const GLint swizzle[4] = {GL_RED, GL_RED, GL_RED, GL_ONE};
+        glTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_RGBA, swizzle);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, src.cols, src.rows, 0, GL_RED, GL_UNSIGNED_BYTE, src.data);
+    }
+    else
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, src.cols, src.rows, 0, GL_RGB, GL_UNSIGNED_BYTE, src.data);
+    }
+}
 void displayImage(cv::Mat& img, GLuint& texture)
 {
-    nfdu8char_t* outPath;
+    nfdu8char_t* outPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
     nfdopendialogu8args_t args = {.filterList = nullptr};
     args.filterList = filters;
     args.filterCount = 1;
+
     const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
     if (result == NFD_OKAY)
     {
-        img = cv::imread(outPath);
-        if (!img.empty())
-        {
-            cv::cvtColor(img, img, cv::COLOR_BGR2RGB);
-
-            if (texture != 0)
-            {
-                glDeleteTextures(1, &texture);
-            }
-
-            glGenTextures(1, &texture);
-            glBindTexture(GL_TEXTURE_2D, texture);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, img.cols, img.rows, 0, GL_RGB, GL_UNSIGNED_BYTE, img.data);
-        }
+        cv::Mat loaded = cv::imread(outPath);
         NFD_FreePathU8(outPath);
+
+        if (loaded.empty())
+        {
+            std::cerr << "Failed to load image\n";
+            return;
+        }
+
+        cv::cvtColor(loaded, loaded, cv::COLOR_BGR2RGB);
+        original = loaded;
+        img = original.clone();
+        uploadTexture(img, texture);
     }
-    else if (result == NFD_CANCEL)
+    else if (result == NFD_ERROR)
     {
-        puts("User pressed cancel.");
-    }
-    else
-    {
-        printf("Error: %s\n", NFD_GetError());
+        std::cerr << "Error: " << NFD_GetError() << '\n';
     }
 }
 
@@ -84,19 +98,17 @@ int main()
     cv::Mat img;
     GLuint texture = 0;
     GLuint sidebarTexture = 0;
-    glGenTextures(1, &sidebarTexture);
-    glBindTexture(GL_TEXTURE_2D, sidebarTexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    const cv::Mat sidebarToggleIcon = cv::imread("../external/assets/hide-sidebar-icon.png", cv::IMREAD_UNCHANGED);
-
-    if (!sidebarToggleIcon.empty())
+    cv::Mat sidebarIcon = cv::imread(ASSETS_DIR "/hide-sidebar-icon.png", cv::IMREAD_UNCHANGED);
+    if (!sidebarIcon.empty())
     {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sidebarToggleIcon.cols, sidebarToggleIcon.rows, 0, GL_BGRA,
-                     GL_UNSIGNED_BYTE, sidebarToggleIcon.data);
-    }
+        if (sidebarIcon.channels() == 4)      cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGRA2RGBA);
+        else if (sidebarIcon.channels() == 3) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGR2RGBA);
+        else if (sidebarIcon.channels() == 1) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_GRAY2RGBA);
 
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, sidebarIcon.cols, sidebarIcon.rows, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, sidebarIcon.data);
+    }
 
     bool isSidebarOpen = true;
     bool isImageOpen = true;
@@ -235,33 +247,17 @@ int main()
                 ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
                 ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
                 ImGui::Text("Adjustments Filters");
-                if (ImGui::MenuItem("Grayscale"))
+                if (ImGui::MenuItem("Original"))
                 {
-                    if (!img.empty())
-                    {
-                        if (img.channels() == 3)
-                        {
-                            cv::cvtColor(img, img, cv::COLOR_RGB2GRAY);
-                        } else if (img.channels() == 4)
-                        {
-                            cv::cvtColor(img, img, cv::COLOR_RGBA2GRAY);
-                        }
+                    img = original.clone();
+                    uploadTexture(img, texture);
+                }
 
-                        if (texture != 0)
-                        {
-                            glDeleteTextures(1, &texture);
-                        }
-
-                        glGenTextures(1, &texture);
-                        glBindTexture(GL_TEXTURE_2D, texture);
-
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_G, GL_RED);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_B, GL_RED);
-                        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, img.cols, img.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
-                                     img.data);
-                    }
+                if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
+                {
+                    cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
+                        : cv::COLOR_RGBA2GRAY);
+                    uploadTexture(img, texture);
                 }
                 ImGui::End();
                 ImGui::PopStyleColor(1);
