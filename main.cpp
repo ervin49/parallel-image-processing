@@ -10,6 +10,8 @@
 #include "imgui_internal.h"
 
 cv::Mat original;
+double cpuDuration;
+
 void uploadTexture(const cv::Mat& m, GLuint& texture)
 {
     const cv::Mat src = m.isContinuous() ? m : m.clone();
@@ -54,7 +56,10 @@ void displayImage(cv::Mat& img, GLuint& texture)
             return;
         }
 
+        const auto start = std::chrono::steady_clock::now();
         cv::cvtColor(loaded, loaded, cv::COLOR_BGR2RGB);
+        const auto end = std::chrono::steady_clock::now();
+        cpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
         original = loaded;
         img = original.clone();
         uploadTexture(img, texture);
@@ -105,13 +110,16 @@ int main()
         else if (sidebarIcon.channels() == 3) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGR2RGBA);
         else if (sidebarIcon.channels() == 1) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_GRAY2RGBA);
 
+        glGenTextures(1, &sidebarTexture);
+        glBindTexture(GL_TEXTURE_2D, sidebarTexture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, sidebarIcon.cols, sidebarIcon.rows, 0,
                      GL_RGBA, GL_UNSIGNED_BYTE, sidebarIcon.data);
     }
 
     bool isSidebarOpen = true;
-    bool isImageOpen = true;
     float mainMenuBarHeight = 0;
     while (!glfwWindowShouldClose(window))
     {
@@ -197,7 +205,6 @@ int main()
                                        static_cast<ImTextureID>(static_cast<intptr_t>(sidebarTexture)), ImVec2(20, 20)))
                 {
                     isSidebarOpen = !isSidebarOpen;
-                    std::cout << "apasat, devenit: " << isSidebarOpen;
                 }
                 ImGui::PopStyleColor(3);
             }
@@ -255,8 +262,11 @@ int main()
 
                 if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
                 {
+                    const auto start = std::chrono::steady_clock::now();
                     cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
                         : cv::COLOR_RGBA2GRAY);
+                    const auto end = std::chrono::steady_clock::now();
+                    cpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
                     uploadTexture(img, texture);
                 }
                 ImGui::End();
@@ -267,6 +277,9 @@ int main()
             ImGui::SetCursorPos(ImVec2(10.0f, 10.0f));
             ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                          ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
+
+            ImGui::Text("CPU Time");
+            ImGui::Text("%.2fms", cpuDuration);
         }
 
         ImGui::PopFont();
