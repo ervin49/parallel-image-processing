@@ -266,8 +266,11 @@ int main()
             {
                 float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
                 sidebarWidth = std::clamp(sidebarWidth, 200.0f, 250.0f);
-                ImGui::SetNextWindowSize(ImVec2(sidebarWidth, ImGui::GetWindowSize().y));
-                ImGui::SetNextWindowPos(ImVec2(ImGui::GetWindowSize().x - sidebarWidth, mainMenuBarHeight));
+                const ImVec2 mainWindowPos = ImGui::GetWindowPos();
+                const ImVec2 mainWindowSize = ImGui::GetWindowSize();
+                ImGui::SetNextWindowSize(ImVec2(sidebarWidth, mainWindowSize.y));
+                ImGui::SetNextWindowPos(ImVec2(mainWindowPos.x + mainWindowSize.x - sidebarWidth,
+                                               mainWindowPos.y));
                 ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
                 ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
                 ImGui::Text("Adjustments Filters");
@@ -292,8 +295,6 @@ int main()
             }
 
             // image view
-            ImGui::SetCursorPos(ImVec2(10.0f, 10.0f));
-            // Image view
             float sidebarWidth = 0.0f;
 
             if (isSidebarOpen)
@@ -306,13 +307,13 @@ int main()
             }
 
             const float padding = 20.0f;
+            const ImVec2 contentMin = ImGui::GetWindowContentRegionMin();
+            const ImVec2 contentMax = ImGui::GetWindowContentRegionMax();
+            const float statsHeight = ImGui::GetTextLineHeightWithSpacing() * 2.0f;
+            const ImVec2 available(contentMax.x - contentMin.x - sidebarWidth - padding,
+                                   contentMax.y - contentMin.y - statsHeight - padding);
 
-            const auto available = ImVec2(
-                ImGui::GetWindowSize().x - sidebarWidth - padding,
-                ImGui::GetContentRegionAvail().y - padding
-            );
-
-            const float aspectRatio = static_cast<float>(img.cols) / img.rows;
+            const float aspectRatio = static_cast<float>(img.cols) / static_cast<float>(img.rows);
 
             float width = available.x;
             float height = width / aspectRatio;
@@ -323,14 +324,14 @@ int main()
                 width = height * aspectRatio;
             }
 
-            // Center image in available area
+            // Center image in the area above the metrics.
             const float offsetX = (available.x - width) * 0.5f;
             const float offsetY = (available.y - height) * 0.5f;
 
-            ImGui::SetCursorPos(ImVec2(
-                padding * 0.5f + offsetX,
-                padding * 0.5f + offsetY
-            ));
+            const float contentLeft = contentMin.x;
+            const float contentTop = contentMin.y;
+            ImGui::SetCursorPos(ImVec2(contentLeft + padding * 0.5f + offsetX,
+                                       contentTop + padding * 0.5f + offsetY));
 
             ImGui::Image(
                 static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
@@ -341,30 +342,36 @@ int main()
             snprintf(cpuTimeText, sizeof(cpuTimeText), "%.2f ms", cpuTime);
 
             char gpuTimeText[32];
-            snprintf(gpuTimeText, sizeof(cpuTimeText), "%.2f ms", gpuTime);
+            snprintf(gpuTimeText, sizeof(gpuTimeText), "%.2f ms", gpuTime);
 
             const float columnWidth = std::max(
                 ImGui::CalcTextSize("CPU Time").x,
                 ImGui::CalcTextSize(cpuTimeText).x);
-            const float firstColumnX = ImGui::GetCursorPosX();
+            const float metricsY = contentTop + contentMax.y - contentMin.y - statsHeight;
+            const float metricsWidth = available.x;
+            const float groupWidth = columnWidth * 2.0f + 200.0f;
+            const float firstColumnX = contentLeft + (metricsWidth - groupWidth) * 0.5f;
             const float secondColumnX = firstColumnX + columnWidth + 100.0f;
             const float thirdColumnX = secondColumnX + columnWidth + 100.0f;
 
-            ImGui::TextUnformatted("CPU Time");
+            ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY));
+            ImGui::Text("CPU Time");
 
             ImGui::SameLine();
             ImGui::SetCursorPosX(secondColumnX);
-            ImGui::TextUnformatted("GPU Time");
+            ImGui::Text("GPU Time");
 
             ImGui::SameLine();
             ImGui::SetCursorPosX(thirdColumnX);
-            ImGui::TextUnformatted("Speedup");
+            ImGui::Text("Speedup");
 
-            ImGui::SetCursorPosX(firstColumnX);
+            ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY + ImGui::GetTextLineHeightWithSpacing()));
             ImGui::TextUnformatted(cpuTimeText);
+
             ImGui::SameLine();
             ImGui::SetCursorPosX(secondColumnX);
             ImGui::TextUnformatted(gpuTimeText);
+
             ImGui::SameLine();
             ImGui::SetCursorPosX(thirdColumnX);
             ImGui::Text("%.2fx", cpuTime / gpuTime);
