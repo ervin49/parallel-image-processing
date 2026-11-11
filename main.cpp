@@ -63,10 +63,12 @@ void displayImage(cv::Mat& img, GLuint& texture)
         cv::cvtColor(cpuLoaded, cpuLoaded, cv::COLOR_BGR2RGB);
         auto end = std::chrono::steady_clock::now();
         originalCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
         start = std::chrono::steady_clock::now();
         cv::cvtColor(gpuLoaded, gpuLoaded, cv::COLOR_BGR2RGB);
         end = std::chrono::steady_clock::now();
         originalGpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
         cpuTime = originalCpuTime;
         gpuTime = originalGpuTime;
         cpuOriginalImage = cpuLoaded;
@@ -278,16 +280,26 @@ int main()
                 {
                     img = cpuOriginalImage.clone();
                     cpuTime = originalCpuTime;
+                    gpuTime = originalGpuTime;
                     uploadTexture(img, texture);
                 }
 
                 if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
                 {
-                    const auto start = std::chrono::steady_clock::now();
+                    cv::UMat gpuImg;
+                    img.copyTo(gpuImg);
+                    auto start = std::chrono::steady_clock::now();
                     cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
                         : cv::COLOR_RGBA2GRAY);
-                    const auto end = std::chrono::steady_clock::now();
+                    auto end = std::chrono::steady_clock::now();
                     cpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    start = std::chrono::steady_clock::now();
+                    cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3 ? cv::COLOR_RGB2GRAY
+                        : cv::COLOR_RGBA2GRAY);
+                    end = std::chrono::steady_clock::now();
+
+                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
                     uploadTexture(img, texture);
                 }
                 ImGui::End();
