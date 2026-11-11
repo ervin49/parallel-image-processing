@@ -278,8 +278,50 @@ int main()
 
             // image view
             ImGui::SetCursorPos(ImVec2(10.0f, 10.0f));
-            ImGui::Image(static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
-                         ImVec2(static_cast<float>(img.cols), static_cast<float>(img.rows)));
+            // Image view
+            float sidebarWidth = 0.0f;
+
+            if (isSidebarOpen)
+            {
+                sidebarWidth = std::clamp(
+                    ImGui::GetWindowSize().x * 0.2f,
+                    200.0f,
+                    250.0f
+                );
+            }
+
+            float padding = 20.0f;
+
+            ImVec2 available = ImVec2(
+                ImGui::GetWindowSize().x - sidebarWidth - padding,
+                ImGui::GetContentRegionAvail().y - padding
+            );
+
+            float aspectRatio = static_cast<float>(img.cols) / img.rows;
+
+            float width = available.x;
+            float height = width / aspectRatio;
+
+            if (height > available.y)
+            {
+                height = available.y;
+                width = height * aspectRatio;
+            }
+
+            // Center image in available area
+            float offsetX = (available.x - width) * 0.5f;
+            float offsetY = (available.y - height) * 0.5f;
+
+            ImGui::SetCursorPos(ImVec2(
+                padding * 0.5f + offsetX,
+                padding * 0.5f + offsetY
+            ));
+
+            ImGui::Image(
+                (ImTextureID)(intptr_t)texture,
+                ImVec2(width, height)
+            );
+
 
             ImGui::Text("CPU Time");
             ImGui::Text("%.2fms", cpuDuration);
