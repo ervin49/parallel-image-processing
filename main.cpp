@@ -10,6 +10,7 @@
 #include "imgui_internal.h"
 
 cv::Mat original;
+double originalCpuDuration;
 double cpuDuration;
 
 void uploadTexture(const cv::Mat& m, GLuint& texture)
@@ -59,7 +60,8 @@ void displayImage(cv::Mat& img, GLuint& texture)
         const auto start = std::chrono::steady_clock::now();
         cv::cvtColor(loaded, loaded, cv::COLOR_BGR2RGB);
         const auto end = std::chrono::steady_clock::now();
-        cpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
+        originalCpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
+        cpuDuration = originalCpuDuration;
         original = loaded;
         img = original.clone();
         uploadTexture(img, texture);
@@ -257,6 +259,7 @@ int main()
                 if (ImGui::MenuItem("Original"))
                 {
                     img = original.clone();
+                    cpuDuration = originalCpuDuration;
                     uploadTexture(img, texture);
                 }
 
