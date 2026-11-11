@@ -1,4 +1,5 @@
 #include <GLFW/glfw3.h>
+#include <opencv2/core/ocl.hpp>
 #include <chrono>
 #include <iostream>
 #include <opencv2/opencv.hpp>
@@ -9,9 +10,8 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
-cv::Mat original;
-double originalCpuDuration;
-double cpuDuration;
+cv::Mat cpuOriginalImage;
+double originalCpuTime, originalGpuTime, cpuTime, gpuTime;
 
 void uploadTexture(const cv::Mat& m, GLuint& texture)
 {
@@ -48,22 +48,29 @@ void displayImage(cv::Mat& img, GLuint& texture)
     const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
     if (result == NFD_OKAY)
     {
-        cv::Mat loaded = cv::imread(outPath);
+        cv::Mat cpuLoaded = cv::imread(outPath);
+        cv::UMat gpuLoaded;
+        cpuLoaded.copyTo(gpuLoaded);
         NFD_FreePathU8(outPath);
 
-        if (loaded.empty())
+        if (cpuLoaded.empty())
         {
             std::cerr << "Failed to load image\n";
             return;
         }
 
-        const auto start = std::chrono::steady_clock::now();
-        cv::cvtColor(loaded, loaded, cv::COLOR_BGR2RGB);
-        const auto end = std::chrono::steady_clock::now();
-        originalCpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
-        cpuDuration = originalCpuDuration;
-        original = loaded;
-        img = original.clone();
+        auto start = std::chrono::steady_clock::now();
+        cv::cvtColor(cpuLoaded, cpuLoaded, cv::COLOR_BGR2RGB);
+        auto end = std::chrono::steady_clock::now();
+        originalCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+        start = std::chrono::steady_clock::now();
+        cv::cvtColor(gpuLoaded, gpuLoaded, cv::COLOR_BGR2RGB);
+        end = std::chrono::steady_clock::now();
+        originalGpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+        cpuTime = originalCpuTime;
+        gpuTime = originalGpuTime;
+        cpuOriginalImage = cpuLoaded;
+        img = cpuOriginalImage.clone();
         uploadTexture(img, texture);
     }
     else if (result == NFD_ERROR)
@@ -99,7 +106,7 @@ int main()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    bool cpuCheck = true, gpuCheck = false;
+    bool benchmarkMode = true, cpuCheck = false, gpuCheck = false;
     const ImGuiIO& io = ImGui::GetIO();
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
     cv::Mat img;
@@ -172,15 +179,23 @@ int main()
             }
             if (ImGui::BeginMenu("Processing"))
             {
+                if (ImGui::MenuItem("Benchmark Mode", nullptr, &benchmarkMode))
+                {
+                    benchmarkMode = true;
+                    cpuCheck = false;
+                    gpuCheck = false;
+                }
                 if (ImGui::MenuItem("CPU Mode", nullptr, &cpuCheck))
                 {
+                    benchmarkMode = false;
                     cpuCheck = true;
                     gpuCheck = false;
                 }
                 if (ImGui::MenuItem("GPU Mode", nullptr, &gpuCheck))
                 {
-                    gpuCheck = true;
+                    benchmarkMode = false;
                     cpuCheck = false;
+                    gpuCheck = true;
                 }
                 ImGui::EndMenu();
             }
@@ -258,8 +273,8 @@ int main()
                 ImGui::Text("Adjustments Filters");
                 if (ImGui::MenuItem("Original"))
                 {
-                    img = original.clone();
-                    cpuDuration = originalCpuDuration;
+                    img = cpuOriginalImage.clone();
+                    cpuTime = originalCpuTime;
                     uploadTexture(img, texture);
                 }
 
@@ -269,7 +284,7 @@ int main()
                     cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
                         : cv::COLOR_RGBA2GRAY);
                     const auto end = std::chrono::steady_clock::now();
-                    cpuDuration = std::chrono::duration<double, std::milli>(end - start).count();
+                    cpuTime = std::chrono::duration<double, std::milli>(end - start).count();
                     uploadTexture(img, texture);
                 }
                 ImGui::End();
@@ -290,14 +305,14 @@ int main()
                 );
             }
 
-            float padding = 20.0f;
+            const float padding = 20.0f;
 
-            ImVec2 available = ImVec2(
+            const auto available = ImVec2(
                 ImGui::GetWindowSize().x - sidebarWidth - padding,
                 ImGui::GetContentRegionAvail().y - padding
             );
 
-            float aspectRatio = static_cast<float>(img.cols) / img.rows;
+            const float aspectRatio = static_cast<float>(img.cols) / img.rows;
 
             float width = available.x;
             float height = width / aspectRatio;
@@ -309,8 +324,8 @@ int main()
             }
 
             // Center image in available area
-            float offsetX = (available.x - width) * 0.5f;
-            float offsetY = (available.y - height) * 0.5f;
+            const float offsetX = (available.x - width) * 0.5f;
+            const float offsetY = (available.y - height) * 0.5f;
 
             ImGui::SetCursorPos(ImVec2(
                 padding * 0.5f + offsetX,
@@ -318,13 +333,41 @@ int main()
             ));
 
             ImGui::Image(
-                (ImTextureID)(intptr_t)texture,
+                static_cast<ImTextureID>(static_cast<intptr_t>(texture)),
                 ImVec2(width, height)
             );
 
+            char cpuTimeText[32];
+            snprintf(cpuTimeText, sizeof(cpuTimeText), "%.2f ms", cpuTime);
 
-            ImGui::Text("CPU Time");
-            ImGui::Text("%.2fms", cpuDuration);
+            char gpuTimeText[32];
+            snprintf(gpuTimeText, sizeof(cpuTimeText), "%.2f ms", gpuTime);
+
+            const float columnWidth = std::max(
+                ImGui::CalcTextSize("CPU Time").x,
+                ImGui::CalcTextSize(cpuTimeText).x);
+            const float firstColumnX = ImGui::GetCursorPosX();
+            const float secondColumnX = firstColumnX + columnWidth + 100.0f;
+            const float thirdColumnX = secondColumnX + columnWidth + 100.0f;
+
+            ImGui::TextUnformatted("CPU Time");
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(secondColumnX);
+            ImGui::TextUnformatted("GPU Time");
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(thirdColumnX);
+            ImGui::TextUnformatted("Speedup");
+
+            ImGui::SetCursorPosX(firstColumnX);
+            ImGui::TextUnformatted(cpuTimeText);
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(secondColumnX);
+            ImGui::TextUnformatted(gpuTimeText);
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(thirdColumnX);
+            ImGui::Text("%.2fx", cpuTime / gpuTime);
         }
 
         ImGui::PopFont();
