@@ -105,12 +105,9 @@ int main()
     }
 
     NFD_Init();
-    glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 
     if (!glfwInit())
         return 1;
-
-    glfwWindowHintString(GLFW_WAYLAND_APP_ID, "parallel-image-processing");
 
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Parallel Image Processing", nullptr, nullptr);
 
