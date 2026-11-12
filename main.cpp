@@ -96,8 +96,11 @@ void displayImage(cv::Mat& img, GLuint& texture)
 
 int main()
 {
-    std::cout << "OpenCV threads: " << cv::getNumThreads() << '\n';
-    std::cout << "Logical CPUs: " << cv::getNumberOfCPUs() << '\n';
+    if (!cv::ocl::haveOpenCL())
+    {
+        std::cerr<<"OpenCL not available";
+    }
+
     NFD_Init();
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 
@@ -387,16 +390,15 @@ int main()
             char gpuTimeText[32];
             snprintf(gpuTimeText, sizeof(gpuTimeText), "%.2f ms", gpuTime);
 
-            const float columnWidth = std::max(
-                ImGui::CalcTextSize("Single-threaded CPU Time").x,
-                ImGui::CalcTextSize(multiThreadedCpuTimeText).x);
+            const float columnWidth = ImGui::CalcTextSize("Speedup vs. single-threaded CPU").x;
             const float metricsY = contentTop + contentMax.y - contentMin.y - statsHeight;
-            const float metricsWidth = available.x;
-            const float groupWidth = columnWidth * 2.0f + 200.0f;
+            const float gapBetweenColumns = 50.0f;
+
             const float firstColumnX = 0.0f;
-            const float secondColumnX = firstColumnX + columnWidth + 100.0f;
-            const float thirdColumnX = secondColumnX + columnWidth + 100.0f;
-            const float forthColumnX = thirdColumnX + columnWidth + 100.0f;
+            const float secondColumnX = firstColumnX + ImGui::CalcTextSize("Single-threaded CPU Time").x + gapBetweenColumns;
+            const float thirdColumnX = secondColumnX + ImGui::CalcTextSize("Multithreaded CPU Time").x + gapBetweenColumns;
+            const float fourthColumnX = thirdColumnX + ImGui::CalcTextSize("GPU Time").x + gapBetweenColumns;
+            const float fifthColumnX = fourthColumnX + ImGui::CalcTextSize("Speedup vs. single-threaded CPU").x + gapBetweenColumns;
 
             ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY));
             ImGui::Text("Single-threaded CPU Time");
@@ -410,14 +412,18 @@ int main()
             ImGui::Text("GPU Time");
 
             ImGui::SameLine();
-            ImGui::SetCursorPosX(forthColumnX);
-            ImGui::Text("Speedup");
+            ImGui::SetCursorPosX(fourthColumnX);
+            ImGui::Text("Speedup vs. single-threaded CPU");
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(fifthColumnX);
+            ImGui::Text("Speedup vs. multithreaded CPU");
 
             ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY + ImGui::GetTextLineHeightWithSpacing()));
             ImGui::TextUnformatted(singleThreadedCpuTimeText);
 
             ImGui::SameLine();
-            ImGui::SetCursorPos(ImVec2(secondColumnX, metricsY + ImGui::GetTextLineHeightWithSpacing()));
+            ImGui::SetCursorPosX(secondColumnX);
             ImGui::TextUnformatted(multiThreadedCpuTimeText);
 
             ImGui::SameLine();
@@ -425,7 +431,11 @@ int main()
             ImGui::TextUnformatted(gpuTimeText);
 
             ImGui::SameLine();
-            ImGui::SetCursorPosX(forthColumnX);
+            ImGui::SetCursorPosX(fourthColumnX);
+            ImGui::Text("%.2fx", singleThreadedCpuTime / gpuTime);
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(fifthColumnX);
             ImGui::Text("%.2fx", multiThreadedCpuTime / gpuTime);
         }
 
