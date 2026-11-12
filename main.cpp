@@ -10,11 +10,14 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
-cv::Mat multiThreadedCpuOriginalTime;
-double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime, multiThreadedCpuTime, gpuTime;
+namespace
+{
+    cv::Mat multiThreadedCpuOriginalTime;
+    double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime, multiThreadedCpuTime, gpuTime;
+}
 const int TOTAL_THREADS = cv::getNumThreads();
 
-void uploadTexture(const cv::Mat& m, GLuint& texture)
+static void uploadTexture(const cv::Mat& m, GLuint& texture)
 {
     const cv::Mat src = m.isContinuous() ? m : m.clone();
 
@@ -29,7 +32,7 @@ void uploadTexture(const cv::Mat& m, GLuint& texture)
 
     if (src.channels() == 1)
     {
-        const GLint swizzle[4] = {GL_RED, GL_RED, GL_RED, GL_ONE};
+        constexpr GLint swizzle[4] = {GL_RED, GL_RED, GL_RED, GL_ONE};
         glTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_SWIZZLE_RGBA, swizzle);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, src.cols, src.rows, 0, GL_RED, GL_UNSIGNED_BYTE, src.data);
     }
@@ -39,7 +42,7 @@ void uploadTexture(const cv::Mat& m, GLuint& texture)
     }
 }
 
-void displayImage(cv::Mat& img, GLuint& texture)
+static void displayImage(cv::Mat& img, GLuint& texture)
 {
     nfdu8char_t* outPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
@@ -126,13 +129,13 @@ int main()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    bool benchmarkMode = true, cpuCheck = false, gpuCheck = false;
     const ImGuiIO& io = ImGui::GetIO();
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
-    cv::Mat img;
-    GLuint texture = 0;
-    GLuint sidebarTexture = 0;
+
+    GLuint texture = 0, sidebarTexture = 0;
     cv::Mat sidebarIcon = cv::imread(ASSETS_DIR "/hide-sidebar-icon.png", cv::IMREAD_UNCHANGED);
+
+    cv::Mat img;
     if (!sidebarIcon.empty())
     {
         if (sidebarIcon.channels() == 4)      cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGRA2RGBA);
@@ -197,28 +200,6 @@ int main()
             {
                 ImGui::EndMenu();
             }
-            if (ImGui::BeginMenu("Processing"))
-            {
-                if (ImGui::MenuItem("Benchmark Mode", nullptr, &benchmarkMode))
-                {
-                    benchmarkMode = true;
-                    cpuCheck = false;
-                    gpuCheck = false;
-                }
-                if (ImGui::MenuItem("CPU Mode", nullptr, &cpuCheck))
-                {
-                    benchmarkMode = false;
-                    cpuCheck = true;
-                    gpuCheck = false;
-                }
-                if (ImGui::MenuItem("GPU Mode", nullptr, &gpuCheck))
-                {
-                    benchmarkMode = false;
-                    cpuCheck = false;
-                    gpuCheck = true;
-                }
-                ImGui::EndMenu();
-            }
             if (ImGui::BeginMenu("View"))
             {
                 ImGui::EndMenu();
@@ -264,6 +245,7 @@ int main()
             ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2));
             ImGui::Text("Open an image to start processing.");
             fontSize = ImGui::CalcTextSize("Open Image").x;
+
             ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2 - 8.0f,
                                        ImGui::GetWindowSize().y / 2 + fontHeight * 1.5f));
             ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 14.0f);
@@ -275,17 +257,22 @@ int main()
             {
                 displayImage(img, texture);
             }
+
             ImGui::PopStyleVar(2);
             ImGui::PopStyleColor(3);
         }
 
         if (!img.empty())
         {
+            float sidebarWidth = 0.0f;
+            if (isSidebarOpen)
+            {
+                sidebarWidth = std::clamp(ImGui::GetWindowSize().x * 0.2f, 200.0f, 250.0f);
+            }
+
             // sidebar
             if (isSidebarOpen)
             {
-                float sidebarWidth = ImGui::GetContentRegionAvail().x * 0.2f;
-                sidebarWidth = std::clamp(sidebarWidth, 200.0f, 250.0f);
                 const ImVec2 mainWindowPos = ImGui::GetWindowPos();
                 const ImVec2 mainWindowSize = ImGui::GetWindowSize();
                 ImGui::SetNextWindowSize(ImVec2(sidebarWidth, mainWindowSize.y));
@@ -338,18 +325,7 @@ int main()
             }
 
             // image view
-            float sidebarWidth = 0.0f;
-
-            if (isSidebarOpen)
-            {
-                sidebarWidth = std::clamp(
-                    ImGui::GetWindowSize().x * 0.2f,
-                    200.0f,
-                    250.0f
-                );
-            }
-
-            const float padding = 20.0f;
+            constexpr float padding = 20.0f;
             const ImVec2 contentMin = ImGui::GetWindowContentRegionMin();
             const ImVec2 contentMax = ImGui::GetWindowContentRegionMax();
             const float statsHeight = ImGui::GetTextLineHeightWithSpacing() * 2.0f;
@@ -367,7 +343,7 @@ int main()
                 width = height * aspectRatio;
             }
 
-            // Center image in the area above the metrics.
+            // center image in the area above the metrics.
             const float offsetX = (available.x - width) * 0.5f;
             const float offsetY = (available.y - height) * 0.5f;
 
@@ -391,25 +367,44 @@ int main()
             snprintf(gpuTimeText, sizeof(gpuTimeText), "%.2f ms", gpuTime);
 
             const float metricsY = contentTop + contentMax.y - contentMin.y - statsHeight;
-            const float gapBetweenColumns = 50.0f;
+            const float metricsWidth = std::max(0.0f, available.x);
+            char cpu1Metric[48];
+            snprintf(cpu1Metric, sizeof(cpu1Metric), "CPU 1T %s", singleThreadedCpuTimeText);
+            char cpuMtMetric[48];
+            snprintf(cpuMtMetric, sizeof(cpuMtMetric), "CPU MT %s", multiThreadedCpuTimeText);
+            char gpuMetric[48];
+            snprintf(gpuMetric, sizeof(gpuMetric), "GPU %s", gpuTimeText);
+            char speedupText[64];
+            snprintf(speedupText, sizeof(speedupText), "Speedup (1T / MT) %.2fx / %.2fx",
+                     singleThreadedCpuTime / gpuTime, multiThreadedCpuTime / gpuTime);
 
-            const float firstColumnX = 0.0f;
-            const float secondColumnX = firstColumnX + ImGui::CalcTextSize("CPU 1T").x + gapBetweenColumns;
-            const float thirdColumnX = secondColumnX + ImGui::CalcTextSize("CPU MT").x + gapBetweenColumns;
-            const float fourthColumnX = thirdColumnX + ImGui::CalcTextSize("GPU").x + gapBetweenColumns;
-            const float fifthColumnX = fourthColumnX + ImGui::CalcTextSize("Speedup").x + gapBetweenColumns;
+            const float textWidths[] = {
+                ImGui::CalcTextSize(cpu1Metric).x,
+                ImGui::CalcTextSize(cpuMtMetric).x,
+                ImGui::CalcTextSize(gpuMetric).x,
+                ImGui::CalcTextSize(speedupText).x,
+            };
+            const float totalTextWidth = textWidths[0] + textWidths[1] + textWidths[2] + textWidths[3];
+            const float separatorWidth = ImGui::CalcTextSize("|").x;
+            const float gapWidth = std::max(0.0f, (metricsWidth - totalTextWidth - separatorWidth * 3.0f) / 6.0f);
+            const float segmentWidths[] = {textWidths[0], textWidths[1], textWidths[2], textWidths[3]};
+            const char* segmentTexts[] = {cpu1Metric, cpuMtMetric, gpuMetric, speedupText};
 
-            ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY));
-            ImGui::Text("CPU 1T %s   |   ", singleThreadedCpuTimeText);
-
-            ImGui::SameLine();
-            ImGui::Text("CPU MT %s   |   ", multiThreadedCpuTimeText);
-
-            ImGui::SameLine();
-            ImGui::Text("GPU %s   |   ", gpuTimeText);
-
-            ImGui::SameLine();
-            ImGui::Text("Speedup (1T / MT) %.2fx / %.2fx", singleThreadedCpuTime / gpuTime, multiThreadedCpuTime / gpuTime);
+            float metricsX = contentLeft + padding * 0.5f;
+            ImGui::SetCursorPos(ImVec2(metricsX, metricsY));
+            for (int i = 0; i < 4; ++i)
+            {
+                ImGui::TextUnformatted(segmentTexts[i]);
+                metricsX += segmentWidths[i];
+                if (i < 3)
+                {
+                    metricsX += gapWidth;
+                    ImGui::SetCursorPos(ImVec2(metricsX, metricsY));
+                    ImGui::TextUnformatted("|");
+                    metricsX += separatorWidth + gapWidth;
+                    ImGui::SetCursorPos(ImVec2(metricsX, metricsY));
+                }
+            }
         }
 
         ImGui::PopFont();
@@ -427,6 +422,8 @@ int main()
 
         glfwSwapBuffers(window);
     }
+
+    // clean up
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
