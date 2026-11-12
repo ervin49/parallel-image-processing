@@ -10,8 +10,9 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
-cv::Mat cpuOriginalImage;
-double originalCpuTime, originalGpuTime, cpuTime, gpuTime;
+cv::Mat multiThreadedCpuOriginalTime;
+double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime, multiThreadedCpuTime, gpuTime;
+const int TOTAL_THREADS = cv::getNumThreads();
 
 void uploadTexture(const cv::Mat& m, GLuint& texture)
 {
@@ -37,6 +38,7 @@ void uploadTexture(const cv::Mat& m, GLuint& texture)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, src.cols, src.rows, 0, GL_RGB, GL_UNSIGNED_BYTE, src.data);
     }
 }
+
 void displayImage(cv::Mat& img, GLuint& texture)
 {
     nfdu8char_t* outPath = nullptr;
@@ -48,31 +50,42 @@ void displayImage(cv::Mat& img, GLuint& texture)
     const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
     if (result == NFD_OKAY)
     {
-        cv::Mat cpuLoaded = cv::imread(outPath);
+        cv::Mat multiCpuLoaded = cv::imread(outPath), singleCpuLoaded;
         cv::UMat gpuLoaded;
-        cpuLoaded.copyTo(gpuLoaded);
+        multiCpuLoaded.copyTo(singleCpuLoaded);
+        multiCpuLoaded.copyTo(gpuLoaded);
         NFD_FreePathU8(outPath);
 
-        if (cpuLoaded.empty())
+        if (multiCpuLoaded.empty())
         {
             std::cerr << "Failed to load image\n";
             return;
         }
 
         auto start = std::chrono::steady_clock::now();
-        cv::cvtColor(cpuLoaded, cpuLoaded, cv::COLOR_BGR2RGB);
+        cv::cvtColor(multiCpuLoaded, multiCpuLoaded, cv::COLOR_BGR2RGB);
         auto end = std::chrono::steady_clock::now();
-        originalCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+        originalMultiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+        cv::setNumThreads(1);
+        start = std::chrono::steady_clock::now();
+        cv::cvtColor(singleCpuLoaded, singleCpuLoaded, cv::COLOR_BGR2RGB);
+        end = std::chrono::steady_clock::now();
+        originalSingleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+        cv::setNumThreads(TOTAL_THREADS);
 
         start = std::chrono::steady_clock::now();
         cv::cvtColor(gpuLoaded, gpuLoaded, cv::COLOR_BGR2RGB);
         end = std::chrono::steady_clock::now();
         originalGpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
-        cpuTime = originalCpuTime;
+        multiThreadedCpuTime = originalMultiThreadedCpuTime;
+        singleThreadedCpuTime = originalSingleThreadedCpuTime;
         gpuTime = originalGpuTime;
-        cpuOriginalImage = cpuLoaded;
-        img = cpuOriginalImage.clone();
+
+        multiThreadedCpuOriginalTime = multiCpuLoaded;
+        img = multiThreadedCpuOriginalTime.clone();
+
         uploadTexture(img, texture);
     }
     else if (result == NFD_ERROR)
@@ -83,6 +96,8 @@ void displayImage(cv::Mat& img, GLuint& texture)
 
 int main()
 {
+    std::cout << "OpenCV threads: " << cv::getNumThreads() << '\n';
+    std::cout << "Logical CPUs: " << cv::getNumberOfCPUs() << '\n';
     NFD_Init();
     glfwInitHint(GLFW_PLATFORM, GLFW_PLATFORM_WAYLAND);
 
@@ -278,8 +293,9 @@ int main()
                 ImGui::Text("Adjustments Filters");
                 if (ImGui::MenuItem("Original"))
                 {
-                    img = cpuOriginalImage.clone();
-                    cpuTime = originalCpuTime;
+                    img = multiThreadedCpuOriginalTime.clone();
+                    singleThreadedCpuTime = originalSingleThreadedCpuTime;
+                    multiThreadedCpuTime = originalMultiThreadedCpuTime;
                     gpuTime = originalGpuTime;
                     uploadTexture(img, texture);
                 }
@@ -287,19 +303,31 @@ int main()
                 if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
                 {
                     cv::UMat gpuImg;
+                    cv::Mat singleCpuImg;
+
+                    img.copyTo(singleCpuImg);
                     img.copyTo(gpuImg);
+
                     auto start = std::chrono::steady_clock::now();
                     cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
                         : cv::COLOR_RGBA2GRAY);
                     auto end = std::chrono::steady_clock::now();
-                    cpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    cv::setNumThreads(1);
+                    start = std::chrono::steady_clock::now();
+                    cv::cvtColor(singleCpuImg, singleCpuImg, singleCpuImg.channels() == 3 ? cv::COLOR_RGB2GRAY
+                        : cv::COLOR_RGBA2GRAY);
+                    end = std::chrono::steady_clock::now();
+                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                    cv::setNumThreads(TOTAL_THREADS);
 
                     start = std::chrono::steady_clock::now();
                     cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3 ? cv::COLOR_RGB2GRAY
                         : cv::COLOR_RGBA2GRAY);
                     end = std::chrono::steady_clock::now();
-
                     gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
                     uploadTexture(img, texture);
                 }
                 ImGui::End();
@@ -350,43 +378,55 @@ int main()
                 ImVec2(width, height)
             );
 
-            char cpuTimeText[32];
-            snprintf(cpuTimeText, sizeof(cpuTimeText), "%.2f ms", cpuTime);
+            char singleThreadedCpuTimeText[32];
+            snprintf(singleThreadedCpuTimeText, sizeof(singleThreadedCpuTimeText), "%.2f ms", singleThreadedCpuTime);
+
+            char multiThreadedCpuTimeText[32];
+            snprintf(multiThreadedCpuTimeText, sizeof(multiThreadedCpuTimeText), "%.2f ms", multiThreadedCpuTime);
 
             char gpuTimeText[32];
             snprintf(gpuTimeText, sizeof(gpuTimeText), "%.2f ms", gpuTime);
 
             const float columnWidth = std::max(
-                ImGui::CalcTextSize("CPU Time").x,
-                ImGui::CalcTextSize(cpuTimeText).x);
+                ImGui::CalcTextSize("Single-threaded CPU Time").x,
+                ImGui::CalcTextSize(multiThreadedCpuTimeText).x);
             const float metricsY = contentTop + contentMax.y - contentMin.y - statsHeight;
             const float metricsWidth = available.x;
             const float groupWidth = columnWidth * 2.0f + 200.0f;
-            const float firstColumnX = contentLeft + (metricsWidth - groupWidth) * 0.5f;
+            const float firstColumnX = 0.0f;
             const float secondColumnX = firstColumnX + columnWidth + 100.0f;
             const float thirdColumnX = secondColumnX + columnWidth + 100.0f;
+            const float forthColumnX = thirdColumnX + columnWidth + 100.0f;
 
             ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY));
-            ImGui::Text("CPU Time");
+            ImGui::Text("Single-threaded CPU Time");
 
             ImGui::SameLine();
-            ImGui::SetCursorPosX(secondColumnX);
+            ImGui::SetCursorPos(ImVec2(secondColumnX, metricsY));
+            ImGui::Text("Multithreaded CPU Time");
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(thirdColumnX);
             ImGui::Text("GPU Time");
 
             ImGui::SameLine();
-            ImGui::SetCursorPosX(thirdColumnX);
+            ImGui::SetCursorPosX(forthColumnX);
             ImGui::Text("Speedup");
 
             ImGui::SetCursorPos(ImVec2(firstColumnX, metricsY + ImGui::GetTextLineHeightWithSpacing()));
-            ImGui::TextUnformatted(cpuTimeText);
+            ImGui::TextUnformatted(singleThreadedCpuTimeText);
 
             ImGui::SameLine();
-            ImGui::SetCursorPosX(secondColumnX);
-            ImGui::TextUnformatted(gpuTimeText);
+            ImGui::SetCursorPos(ImVec2(secondColumnX, metricsY + ImGui::GetTextLineHeightWithSpacing()));
+            ImGui::TextUnformatted(multiThreadedCpuTimeText);
 
             ImGui::SameLine();
             ImGui::SetCursorPosX(thirdColumnX);
-            ImGui::Text("%.2fx", cpuTime / gpuTime);
+            ImGui::TextUnformatted(gpuTimeText);
+
+            ImGui::SameLine();
+            ImGui::SetCursorPosX(forthColumnX);
+            ImGui::Text("%.2fx", multiThreadedCpuTime / gpuTime);
         }
 
         ImGui::PopFont();

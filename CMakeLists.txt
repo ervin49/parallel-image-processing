@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 3.20)
 project(parallel_image_processing LANGUAGES CXX)
 
