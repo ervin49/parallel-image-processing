@@ -346,6 +346,27 @@ int main()
 
                     uploadTexture(img, texture);
                 }
+                if (ImGui::MenuItem("Median Blur"))
+                {
+                    auto start = std::chrono::steady_clock::now();
+                    cv::medianBlur(img, img, 5);
+                    auto end = std::chrono::steady_clock::now();
+                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    cv::setNumThreads(1);
+                    start = std::chrono::steady_clock::now();
+                    cv::medianBlur(singleCpuImg, singleCpuImg, 5);
+                    end = std::chrono::steady_clock::now();
+                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                    cv::setNumThreads(TOTAL_THREADS);
+
+                    start = std::chrono::steady_clock::now();
+                    cv::medianBlur(gpuImg, gpuImg, 5);
+                    end = std::chrono::steady_clock::now();
+                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    uploadTexture(img, texture);
+                }
                 ImGui::End();
                 ImGui::PopStyleColor(1);
             }
