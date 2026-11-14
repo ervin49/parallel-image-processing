@@ -14,8 +14,10 @@
 namespace
 {
     cv::Mat multiThreadedCpuOriginalTime;
-    double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime, multiThreadedCpuTime, gpuTime;
+    double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime,
+           multiThreadedCpuTime, gpuTime;
 }
+
 const int TOTAL_THREADS = cv::getNumThreads();
 
 static void uploadTexture(const cv::Mat& m, GLuint& texture)
@@ -102,7 +104,7 @@ int main()
 {
     if (!cv::ocl::haveOpenCL())
     {
-        std::cerr<<"OpenCL not available";
+        std::cerr << "OpenCL not available";
     }
 
     NFD_Init();
@@ -133,13 +135,13 @@ int main()
     GLuint texture = 0, sidebarTexture = 0;
     const char* sidebarIconPath = ASSETS_DIR "/hide-sidebar-icon.png";
     cv::Mat sidebarIcon = std::filesystem::exists(sidebarIconPath)
-        ? cv::imread(sidebarIconPath, cv::IMREAD_UNCHANGED)
-        : cv::Mat{};
+                              ? cv::imread(sidebarIconPath, cv::IMREAD_UNCHANGED)
+                              : cv::Mat{};
 
     cv::Mat img;
     if (!sidebarIcon.empty())
     {
-        if (sidebarIcon.channels() == 4)      cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGRA2RGBA);
+        if (sidebarIcon.channels() == 4) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGRA2RGBA);
         else if (sidebarIcon.channels() == 3) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGR2RGBA);
         else if (sidebarIcon.channels() == 1) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_GRAY2RGBA);
 
@@ -233,7 +235,7 @@ int main()
         ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x, io.DisplaySize.y - mainMenuBarHeight));
         ImGui::Begin("Parallel Image Processing", &open,
                      ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar |
-                         ImGuiWindowFlags_NoBringToFrontOnFocus);
+                     ImGuiWindowFlags_NoBringToFrontOnFocus);
 
         if (img.empty())
         {
@@ -265,6 +267,11 @@ int main()
 
         if (!img.empty())
         {
+            cv::UMat gpuImg;
+            cv::Mat singleCpuImg;
+
+            img.copyTo(singleCpuImg);
+            img.copyTo(gpuImg);
             float sidebarWidth = 0.0f;
             if (isSidebarOpen)
             {
@@ -293,29 +300,47 @@ int main()
 
                 if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
                 {
-                    cv::UMat gpuImg;
-                    cv::Mat singleCpuImg;
-
-                    img.copyTo(singleCpuImg);
-                    img.copyTo(gpuImg);
-
                     auto start = std::chrono::steady_clock::now();
-                    cv::cvtColor(img, img, img.channels() == 3 ? cv::COLOR_RGB2GRAY
-                        : cv::COLOR_RGBA2GRAY);
+                    cv::cvtColor(img, img, img.channels() == 3
+                                               ? cv::COLOR_RGB2GRAY
+                                               : cv::COLOR_RGBA2GRAY);
                     auto end = std::chrono::steady_clock::now();
                     multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                     cv::setNumThreads(1);
                     start = std::chrono::steady_clock::now();
-                    cv::cvtColor(singleCpuImg, singleCpuImg, singleCpuImg.channels() == 3 ? cv::COLOR_RGB2GRAY
-                        : cv::COLOR_RGBA2GRAY);
+                    cv::cvtColor(singleCpuImg, singleCpuImg, singleCpuImg.channels() == 3
+                                                                 ? cv::COLOR_RGB2GRAY
+                                                                 : cv::COLOR_RGBA2GRAY);
                     end = std::chrono::steady_clock::now();
                     singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
                     cv::setNumThreads(TOTAL_THREADS);
 
                     start = std::chrono::steady_clock::now();
-                    cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3 ? cv::COLOR_RGB2GRAY
-                        : cv::COLOR_RGBA2GRAY);
+                    cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3
+                                                     ? cv::COLOR_RGB2GRAY
+                                                     : cv::COLOR_RGBA2GRAY);
+                    end = std::chrono::steady_clock::now();
+                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    uploadTexture(img, texture);
+                }
+                if (ImGui::MenuItem("Gaussian Blur"))
+                {
+                    auto start = std::chrono::steady_clock::now();
+                    cv::GaussianBlur(img, img, cv::Size(9, 9), 0);
+                    auto end = std::chrono::steady_clock::now();
+                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                    cv::setNumThreads(1);
+                    start = std::chrono::steady_clock::now();
+                    cv::GaussianBlur(singleCpuImg, singleCpuImg, cv::Size(9, 9), 0);
+                    end = std::chrono::steady_clock::now();
+                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                    cv::setNumThreads(TOTAL_THREADS);
+
+                    start = std::chrono::steady_clock::now();
+                    cv::GaussianBlur(gpuImg, gpuImg, cv::Size(9, 9), 0);
                     end = std::chrono::steady_clock::now();
                     gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
