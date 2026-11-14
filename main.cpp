@@ -288,85 +288,107 @@ int main()
                                                mainWindowPos.y));
                 ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.145f, 0.145f, 0.149f, 1.0f));
                 ImGui::Begin("Sidebar", &isSidebarOpen, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
-                ImGui::Text("Adjustments Filters");
-                if (ImGui::MenuItem("Original"))
+                ImGui::PushStyleColor(ImGuiCol_Tab, ImVec4(0, 0, 0, 0));
+                ImGui::PushStyleColor(ImGuiCol_TabHovered, ImVec4(0.35f, 0.35f, 0.35f, 1));
+                ImGui::PushStyleColor(ImGuiCol_TabSelected, ImVec4(0.45f, 0.45f, 0.45f, 1));
+                ImGui::PushStyleColor(ImGuiCol_TabSelectedOverline, ImVec4(0.45f, 0.45f, 0.45f, 1));
+                ImGui::PushStyleColor(ImGuiCol_TabDimmed, ImVec4(0, 0, 0, 0));
+                ImGui::PushStyleColor(ImGuiCol_TabDimmedSelected, ImVec4(0.45f, 0.45f, 0.45f, 1));
+                ImGui::PushStyleColor(ImGuiCol_TabDimmedSelectedOverline, ImVec4(0.45f, 0.45f, 0.45f, 1));
+                if (ImGui::BeginTabBar("tab_bar"))
                 {
-                    img = multiThreadedCpuOriginalTime.clone();
-                    singleThreadedCpuTime = originalSingleThreadedCpuTime;
-                    multiThreadedCpuTime = originalMultiThreadedCpuTime;
-                    gpuTime = originalGpuTime;
-                    uploadTexture(img, texture);
-                }
-
-                if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
+                if (ImGui::BeginTabItem("Filters"))
                 {
-                    auto start = std::chrono::steady_clock::now();
-                    cv::cvtColor(img, img, img.channels() == 3
-                                               ? cv::COLOR_RGB2GRAY
-                                               : cv::COLOR_RGBA2GRAY);
-                    auto end = std::chrono::steady_clock::now();
-                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                    ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.35f, 0.35f, 0.35f, 1));
+                    ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.45f, 0.45f, 0.45f, 1));
+                    if (ImGui::MenuItem("Original"))
+                    {
+                        img = multiThreadedCpuOriginalTime.clone();
+                        singleThreadedCpuTime = originalSingleThreadedCpuTime;
+                        multiThreadedCpuTime = originalMultiThreadedCpuTime;
+                        gpuTime = originalGpuTime;
+                        uploadTexture(img, texture);
+                    }
 
-                    cv::setNumThreads(1);
-                    start = std::chrono::steady_clock::now();
-                    cv::cvtColor(singleCpuImg, singleCpuImg, singleCpuImg.channels() == 3
-                                                                 ? cv::COLOR_RGB2GRAY
-                                                                 : cv::COLOR_RGBA2GRAY);
-                    end = std::chrono::steady_clock::now();
-                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-                    cv::setNumThreads(TOTAL_THREADS);
+                    if (ImGui::MenuItem("Grayscale") && img.channels() >= 3)
+                    {
+                        auto start = std::chrono::steady_clock::now();
+                        cv::cvtColor(img, img, img.channels() == 3
+                                                   ? cv::COLOR_RGB2GRAY
+                                                   : cv::COLOR_RGBA2GRAY);
+                        auto end = std::chrono::steady_clock::now();
+                        multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
-                    start = std::chrono::steady_clock::now();
-                    cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3
-                                                     ? cv::COLOR_RGB2GRAY
-                                                     : cv::COLOR_RGBA2GRAY);
-                    end = std::chrono::steady_clock::now();
-                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                        cv::setNumThreads(1);
+                        start = std::chrono::steady_clock::now();
+                        cv::cvtColor(singleCpuImg, singleCpuImg, singleCpuImg.channels() == 3
+                                                                     ? cv::COLOR_RGB2GRAY
+                                                                     : cv::COLOR_RGBA2GRAY);
+                        end = std::chrono::steady_clock::now();
+                        singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                        cv::setNumThreads(TOTAL_THREADS);
 
-                    uploadTexture(img, texture);
+                        start = std::chrono::steady_clock::now();
+                        cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3
+                                                         ? cv::COLOR_RGB2GRAY
+                                                         : cv::COLOR_RGBA2GRAY);
+                        end = std::chrono::steady_clock::now();
+                        gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                        uploadTexture(img, texture);
+                    }
+                    if (ImGui::MenuItem("Gaussian Blur"))
+                    {
+                        auto start = std::chrono::steady_clock::now();
+                        cv::GaussianBlur(img, img, cv::Size(9, 9), 0);
+                        auto end = std::chrono::steady_clock::now();
+                        multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                        cv::setNumThreads(1);
+                        start = std::chrono::steady_clock::now();
+                        cv::GaussianBlur(singleCpuImg, singleCpuImg, cv::Size(9, 9), 0);
+                        end = std::chrono::steady_clock::now();
+                        singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                        cv::setNumThreads(TOTAL_THREADS);
+
+                        start = std::chrono::steady_clock::now();
+                        cv::GaussianBlur(gpuImg, gpuImg, cv::Size(9, 9), 0);
+                        end = std::chrono::steady_clock::now();
+                        gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                        uploadTexture(img, texture);
+                    }
+                    if (ImGui::MenuItem("Median Blur"))
+                    {
+                        auto start = std::chrono::steady_clock::now();
+                        cv::medianBlur(img, img, 5);
+                        auto end = std::chrono::steady_clock::now();
+                        multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                        cv::setNumThreads(1);
+                        start = std::chrono::steady_clock::now();
+                        cv::medianBlur(singleCpuImg, singleCpuImg, 5);
+                        end = std::chrono::steady_clock::now();
+                        singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                        cv::setNumThreads(TOTAL_THREADS);
+
+                        start = std::chrono::steady_clock::now();
+                        cv::medianBlur(gpuImg, gpuImg, 5);
+                        end = std::chrono::steady_clock::now();
+                        gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                        uploadTexture(img, texture);
+                    }
+                    ImGui::PopStyleColor(2);
+                    ImGui::EndTabItem();
                 }
-                if (ImGui::MenuItem("Gaussian Blur"))
+                if (ImGui::BeginTabItem("Adjustments"))
                 {
-                    auto start = std::chrono::steady_clock::now();
-                    cv::GaussianBlur(img, img, cv::Size(9, 9), 0);
-                    auto end = std::chrono::steady_clock::now();
-                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-
-                    cv::setNumThreads(1);
-                    start = std::chrono::steady_clock::now();
-                    cv::GaussianBlur(singleCpuImg, singleCpuImg, cv::Size(9, 9), 0);
-                    end = std::chrono::steady_clock::now();
-                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-                    cv::setNumThreads(TOTAL_THREADS);
-
-                    start = std::chrono::steady_clock::now();
-                    cv::GaussianBlur(gpuImg, gpuImg, cv::Size(9, 9), 0);
-                    end = std::chrono::steady_clock::now();
-                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-
-                    uploadTexture(img, texture);
+                    ImGui::EndTabItem();
                 }
-                if (ImGui::MenuItem("Median Blur"))
-                {
-                    auto start = std::chrono::steady_clock::now();
-                    cv::medianBlur(img, img, 5);
-                    auto end = std::chrono::steady_clock::now();
-                    multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-
-                    cv::setNumThreads(1);
-                    start = std::chrono::steady_clock::now();
-                    cv::medianBlur(singleCpuImg, singleCpuImg, 5);
-                    end = std::chrono::steady_clock::now();
-                    singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-                    cv::setNumThreads(TOTAL_THREADS);
-
-                    start = std::chrono::steady_clock::now();
-                    cv::medianBlur(gpuImg, gpuImg, 5);
-                    end = std::chrono::steady_clock::now();
-                    gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
-
-                    uploadTexture(img, texture);
+                ImGui::EndTabBar();
                 }
+                ImGui::PopStyleColor(7);
                 ImGui::End();
                 ImGui::PopStyleColor(1);
             }
