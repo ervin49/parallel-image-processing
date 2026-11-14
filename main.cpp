@@ -1,6 +1,7 @@
 #include <GLFW/glfw3.h>
 #include <opencv2/core/ocl.hpp>
 #include <chrono>
+#include <filesystem>
 #include <iostream>
 #include <opencv2/opencv.hpp>
 
@@ -130,7 +131,10 @@ int main()
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
 
     GLuint texture = 0, sidebarTexture = 0;
-    cv::Mat sidebarIcon = cv::imread(ASSETS_DIR "/hide-sidebar-icon.png", cv::IMREAD_UNCHANGED);
+    const char* sidebarIconPath = ASSETS_DIR "/hide-sidebar-icon.png";
+    cv::Mat sidebarIcon = std::filesystem::exists(sidebarIconPath)
+        ? cv::imread(sidebarIconPath, cv::IMREAD_UNCHANGED)
+        : cv::Mat{};
 
     cv::Mat img;
     if (!sidebarIcon.empty())

@@ -33,7 +33,7 @@ if(nfd_PLATFORM STREQUAL PLATFORM_LINUX)
   if(NFD_WAYLAND)
     pkg_check_modules(WAYLAND REQUIRED wayland-client)
     message(STATUS "Using Wayland version: ${WAYLAND_VERSION}")
-    set(NFD_WAYLAND_PROTOCOL_XDG_FOREIGN ${CMAKE_CURRENT_SOURCE_DIR}/../3ps/wayland-protocols/unstable/xdg-foreign/xdg-foreign-unstable-v1.xml)
+    set(NFD_WAYLAND_PROTOCOL_XDG_FOREIGN ${CMAKE_CURRENT_SOURCE_DIR}/xdg-foreign-unstable-v1.xml)
     add_custom_command(
       OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/xdg-foreign-unstable-v1.h
       COMMAND wayland-scanner client-header < ${NFD_WAYLAND_PROTOCOL_XDG_FOREIGN} > ${CMAKE_CURRENT_BINARY_DIR}/xdg-foreign-unstable-v1.h
