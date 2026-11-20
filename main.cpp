@@ -1,6 +1,7 @@
 #include <GLFW/glfw3.h>
 #include <opencv2/core/ocl.hpp>
 #include <chrono>
+#include <clocale>
 #include <filesystem>
 #include <iostream>
 #include <opencv2/opencv.hpp>
@@ -148,6 +149,9 @@ int main()
     }
 
     NFD_Init();
+    // Native dialog initialization may adopt a locale that formats OpenCL
+    // kernel constants with commas, which makes generated kernels invalid.
+    std::setlocale(LC_NUMERIC, "C");
 
     if (!glfwInit())
         return 1;
@@ -477,7 +481,8 @@ int main()
                             cv::setNumThreads(TOTAL_THREADS);
 
                             start = std::chrono::steady_clock::now();
-                            cv::filter2D(gpuImg, gpuImg, -1, kernel);
+                            cv::UMat gpuSharpened;
+                            cv::filter2D(gpuImg, gpuSharpened, -1, kernel);
                             cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
