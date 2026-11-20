@@ -46,7 +46,7 @@ static void uploadTexture(const cv::Mat& m, GLuint& texture)
 }
 
 static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightnessValue, int& contrastValue,
-                         GLuint& texture)
+                         bool& invertColors, GLuint& texture)
 {
     nfdu8char_t* outPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
@@ -95,6 +95,7 @@ static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightne
         brightnessBaseImg = img.clone();
         brightnessValue = 0;
         contrastValue = 0;
+        invertColors = false;
 
         uploadTexture(img, texture);
     }
@@ -139,6 +140,7 @@ int main()
     GLuint texture = 0, sidebarTexture = 0;
     int brightnessValue = 0;
     int contrastValue = 0;
+    bool invertColors = false;
     const char* sidebarIconPath = ASSETS_DIR "/hide-sidebar-icon.png";
     cv::Mat sidebarIcon = std::filesystem::exists(sidebarIconPath)
                               ? cv::imread(sidebarIconPath, cv::IMREAD_UNCHANGED)
@@ -184,7 +186,7 @@ int main()
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
                 {
-                    displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, texture);
+                    displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, invertColors, texture);
                 }
                 ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
@@ -265,7 +267,7 @@ int main()
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
             if (ImGui::Button("Open Image"))
             {
-                displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, texture);
+                displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, invertColors, texture);
             }
 
             ImGui::PopStyleVar(2);
@@ -318,6 +320,7 @@ int main()
                             gpuTime = originalGpuTime;
                             brightnessValue = 0;
                             contrastValue = 0;
+                            invertColors = false;
                             brightnessBaseImg = img.clone();
                             uploadTexture(img, texture);
                         }
@@ -352,6 +355,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            invertColors = false;
                         }
                         if (ImGui::MenuItem("Gaussian Blur"))
                         {
@@ -377,6 +381,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            invertColors = false;
                         }
                         if (ImGui::MenuItem("Median Blur"))
                         {
@@ -402,6 +407,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            invertColors = false;
                         }
 
                         if (ImGui::MenuItem("Sharpening"))
@@ -433,6 +439,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            invertColors = false;
                         }
                         ImGui::PopStyleColor(2);
                         ImGui::EndTabItem();
@@ -447,6 +454,8 @@ int main()
                         ImGui::Spacing();
                         ImGui::TextUnformatted("Contrast");
                         adjustmentsChanged |= ImGui::SliderInt("##Contrast", &contrastValue, 0, 100);
+                        ImGui::Spacing();
+                        adjustmentsChanged |= ImGui::Checkbox("Invert Colors", &invertColors);
                         ImGui::PopItemWidth();
                         ImGui::PopStyleColor(2);
                         if (adjustmentsChanged)
@@ -456,12 +465,16 @@ int main()
 
                             auto start = std::chrono::steady_clock::now();
                             brightnessBaseImg.convertTo(img, -1, alpha, beta);
+                            if (invertColors)
+                                cv::bitwise_not(img, img);
                             auto end = std::chrono::steady_clock::now();
                             multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             cv::setNumThreads(1);
                             start = std::chrono::steady_clock::now();
                             brightnessBaseImg.convertTo(singleCpuImg, -1, alpha, beta);
+                            if (invertColors)
+                                cv::bitwise_not(singleCpuImg, singleCpuImg);
                             end = std::chrono::steady_clock::now();
                             singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
                             cv::setNumThreads(TOTAL_THREADS);
@@ -469,6 +482,8 @@ int main()
                             brightnessBaseImg.copyTo(gpuImg);
                             start = std::chrono::steady_clock::now();
                             gpuImg.convertTo(gpuImg, -1, alpha, beta);
+                            if (invertColors)
+                                cv::bitwise_not(gpuImg, gpuImg);
                             cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
