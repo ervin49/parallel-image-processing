@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <vector>
 
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
@@ -45,8 +46,31 @@ static void uploadTexture(const cv::Mat& m, GLuint& texture)
     }
 }
 
+template <typename Image>
+static void applyAdjustments(const Image& source, Image& result, int brightness, int contrast, int saturation,
+                             bool invertColors)
+{
+    const double alpha = 1.0 + contrast / 100.0;
+    const double beta = brightness + 128.0 * (1.0 - alpha);
+    source.convertTo(result, -1, alpha, beta);
+
+    if (result.channels() == 3 && saturation > 0)
+    {
+        Image hsv;
+        cv::cvtColor(result, hsv, cv::COLOR_RGB2HSV);
+        std::vector<Image> channels;
+        cv::split(hsv, channels);
+        channels[1].convertTo(channels[1], -1, 1.0 + saturation / 100.0);
+        cv::merge(channels, hsv);
+        cv::cvtColor(hsv, result, cv::COLOR_HSV2RGB);
+    }
+
+    if (invertColors)
+        cv::bitwise_not(result, result);
+}
+
 static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightnessValue, int& contrastValue,
-                         bool& invertColors, GLuint& texture)
+                         int& saturationValue, bool& invertColors, GLuint& texture)
 {
     nfdu8char_t* outPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
@@ -95,6 +119,7 @@ static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightne
         brightnessBaseImg = img.clone();
         brightnessValue = 0;
         contrastValue = 0;
+        saturationValue = 0;
         invertColors = false;
 
         uploadTexture(img, texture);
@@ -140,6 +165,7 @@ int main()
     GLuint texture = 0, sidebarTexture = 0;
     int brightnessValue = 0;
     int contrastValue = 0;
+    int saturationValue = 0;
     bool invertColors = false;
     const char* sidebarIconPath = ASSETS_DIR "/hide-sidebar-icon.png";
     cv::Mat sidebarIcon = std::filesystem::exists(sidebarIconPath)
@@ -186,7 +212,8 @@ int main()
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
                 {
-                    displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, invertColors, texture);
+                    displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, saturationValue,
+                                 invertColors, texture);
                 }
                 ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
@@ -267,7 +294,8 @@ int main()
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
             if (ImGui::Button("Open Image"))
             {
-                displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, invertColors, texture);
+                displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, saturationValue, invertColors,
+                             texture);
             }
 
             ImGui::PopStyleVar(2);
@@ -320,6 +348,7 @@ int main()
                             gpuTime = originalGpuTime;
                             brightnessValue = 0;
                             contrastValue = 0;
+                            saturationValue = 0;
                             invertColors = false;
                             brightnessBaseImg = img.clone();
                             uploadTexture(img, texture);
@@ -355,6 +384,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            saturationValue = 0;
                             invertColors = false;
                         }
                         if (ImGui::MenuItem("Gaussian Blur"))
@@ -381,6 +411,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            saturationValue = 0;
                             invertColors = false;
                         }
                         if (ImGui::MenuItem("Median Blur"))
@@ -407,6 +438,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            saturationValue = 0;
                             invertColors = false;
                         }
 
@@ -439,6 +471,7 @@ int main()
                             brightnessBaseImg = img.clone();
                             brightnessValue = 0;
                             contrastValue = 0;
+                            saturationValue = 0;
                             invertColors = false;
                         }
                         ImGui::PopStyleColor(2);
@@ -455,35 +488,33 @@ int main()
                         ImGui::TextUnformatted("Contrast");
                         adjustmentsChanged |= ImGui::SliderInt("##Contrast", &contrastValue, 0, 100);
                         ImGui::Spacing();
+                        ImGui::TextUnformatted("Saturation");
+                        adjustmentsChanged |= ImGui::SliderInt("##Saturation", &saturationValue, 0, 100);
+                        ImGui::Spacing();
                         adjustmentsChanged |= ImGui::Checkbox("Invert Colors", &invertColors);
                         ImGui::PopItemWidth();
                         ImGui::PopStyleColor(2);
                         if (adjustmentsChanged)
                         {
-                            const double alpha = 1.0 + contrastValue / 100.0;
-                            const double beta = brightnessValue + 128.0 * (1.0 - alpha);
-
                             auto start = std::chrono::steady_clock::now();
-                            brightnessBaseImg.convertTo(img, -1, alpha, beta);
-                            if (invertColors)
-                                cv::bitwise_not(img, img);
+                            applyAdjustments(brightnessBaseImg, img, brightnessValue, contrastValue, saturationValue,
+                                             invertColors);
                             auto end = std::chrono::steady_clock::now();
                             multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             cv::setNumThreads(1);
                             start = std::chrono::steady_clock::now();
-                            brightnessBaseImg.convertTo(singleCpuImg, -1, alpha, beta);
-                            if (invertColors)
-                                cv::bitwise_not(singleCpuImg, singleCpuImg);
+                            applyAdjustments(brightnessBaseImg, singleCpuImg, brightnessValue, contrastValue,
+                                             saturationValue, invertColors);
                             end = std::chrono::steady_clock::now();
                             singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
                             cv::setNumThreads(TOTAL_THREADS);
 
-                            brightnessBaseImg.copyTo(gpuImg);
+                            cv::UMat gpuBaseImg;
+                            brightnessBaseImg.copyTo(gpuBaseImg);
                             start = std::chrono::steady_clock::now();
-                            gpuImg.convertTo(gpuImg, -1, alpha, beta);
-                            if (invertColors)
-                                cv::bitwise_not(gpuImg, gpuImg);
+                            applyAdjustments(gpuBaseImg, gpuImg, brightnessValue, contrastValue, saturationValue,
+                                             invertColors);
                             cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
