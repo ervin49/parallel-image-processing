@@ -45,7 +45,8 @@ static void uploadTexture(const cv::Mat& m, GLuint& texture)
     }
 }
 
-static void displayImage(cv::Mat& img, GLuint& texture)
+static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightnessValue, int& contrastValue,
+                         GLuint& texture)
 {
     nfdu8char_t* outPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
@@ -91,6 +92,9 @@ static void displayImage(cv::Mat& img, GLuint& texture)
 
         multiThreadedCpuOriginalImg = multiCpuLoaded;
         img = multiThreadedCpuOriginalImg.clone();
+        brightnessBaseImg = img.clone();
+        brightnessValue = 0;
+        contrastValue = 0;
 
         uploadTexture(img, texture);
     }
@@ -133,12 +137,15 @@ int main()
     ImFont* font = io.Fonts->AddFontFromFileTTF(ASSETS_DIR "/fonts/ARIAL.TTF");
 
     GLuint texture = 0, sidebarTexture = 0;
+    int brightnessValue = 0;
+    int contrastValue = 0;
     const char* sidebarIconPath = ASSETS_DIR "/hide-sidebar-icon.png";
     cv::Mat sidebarIcon = std::filesystem::exists(sidebarIconPath)
                               ? cv::imread(sidebarIconPath, cv::IMREAD_UNCHANGED)
                               : cv::Mat{};
 
     cv::Mat img;
+    cv::Mat brightnessBaseImg;
     if (!sidebarIcon.empty())
     {
         if (sidebarIcon.channels() == 4) cv::cvtColor(sidebarIcon, sidebarIcon, cv::COLOR_BGRA2RGBA);
@@ -177,7 +184,7 @@ int main()
             {
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
                 {
-                    displayImage(img, texture);
+                    displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, texture);
                 }
                 ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
@@ -258,7 +265,7 @@ int main()
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
             if (ImGui::Button("Open Image"))
             {
-                displayImage(img, texture);
+                displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, texture);
             }
 
             ImGui::PopStyleVar(2);
@@ -309,6 +316,9 @@ int main()
                             singleThreadedCpuTime = originalSingleThreadedCpuTime;
                             multiThreadedCpuTime = originalMultiThreadedCpuTime;
                             gpuTime = originalGpuTime;
+                            brightnessValue = 0;
+                            contrastValue = 0;
+                            brightnessBaseImg = img.clone();
                             uploadTexture(img, texture);
                         }
 
@@ -338,6 +348,9 @@ int main()
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             uploadTexture(img, texture);
+                            brightnessBaseImg = img.clone();
+                            brightnessValue = 0;
+                            contrastValue = 0;
                         }
                         if (ImGui::MenuItem("Gaussian Blur"))
                         {
@@ -359,6 +372,9 @@ int main()
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             uploadTexture(img, texture);
+                            brightnessBaseImg = img.clone();
+                            brightnessValue = 0;
+                            contrastValue = 0;
                         }
                         if (ImGui::MenuItem("Median Blur"))
                         {
@@ -380,6 +396,9 @@ int main()
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             uploadTexture(img, texture);
+                            brightnessBaseImg = img.clone();
+                            brightnessValue = 0;
+                            contrastValue = 0;
                         }
 
                         if (ImGui::MenuItem("Sharpening"))
@@ -407,12 +426,32 @@ int main()
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
                             uploadTexture(img, texture);
+                            brightnessBaseImg = img.clone();
+                            brightnessValue = 0;
+                            contrastValue = 0;
                         }
                         ImGui::PopStyleColor(2);
                         ImGui::EndTabItem();
                     }
                     if (ImGui::BeginTabItem("Adjustments"))
                     {
+                        ImGui::PushStyleColor(ImGuiCol_SliderGrab, ImVec4(0.35f, 0.35f, 0.35f, 1.0f));
+                        ImGui::PushStyleColor(ImGuiCol_SliderGrabActive, ImVec4(0.45f, 0.45f, 0.45f, 1.0f));
+                        ImGui::PushItemWidth(-1.0f);
+                        ImGui::TextUnformatted("Brightness");
+                        bool adjustmentsChanged = ImGui::SliderInt("##Brightness", &brightnessValue, 0, 100);
+                        ImGui::Spacing();
+                        ImGui::TextUnformatted("Contrast");
+                        adjustmentsChanged |= ImGui::SliderInt("##Contrast", &contrastValue, 0, 100);
+                        ImGui::PopItemWidth();
+                        ImGui::PopStyleColor(2);
+                        if (adjustmentsChanged)
+                        {
+                            const double alpha = 1.0 + contrastValue / 100.0;
+                            const double beta = brightnessValue + 128.0 * (1.0 - alpha);
+                            brightnessBaseImg.convertTo(img, -1, alpha, beta);
+                            uploadTexture(img, texture);
+                        }
                         ImGui::EndTabItem();
                     }
                     ImGui::EndTabBar();
