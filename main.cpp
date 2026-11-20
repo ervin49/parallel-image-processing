@@ -344,6 +344,7 @@ int main()
                             cv::cvtColor(gpuImg, gpuImg, gpuImg.channels() == 3
                                                              ? cv::COLOR_RGB2GRAY
                                                              : cv::COLOR_RGBA2GRAY);
+                            cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
@@ -368,6 +369,7 @@ int main()
 
                             start = std::chrono::steady_clock::now();
                             cv::GaussianBlur(gpuImg, gpuImg, cv::Size(9, 9), 0);
+                            cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
@@ -392,6 +394,7 @@ int main()
 
                             start = std::chrono::steady_clock::now();
                             cv::medianBlur(gpuImg, gpuImg, 5);
+                            cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
@@ -422,6 +425,7 @@ int main()
 
                             start = std::chrono::steady_clock::now();
                             cv::filter2D(gpuImg, gpuImg, -1, kernel);
+                            cv::ocl::finish();
                             end = std::chrono::steady_clock::now();
                             gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
 
@@ -449,7 +453,26 @@ int main()
                         {
                             const double alpha = 1.0 + contrastValue / 100.0;
                             const double beta = brightnessValue + 128.0 * (1.0 - alpha);
+
+                            auto start = std::chrono::steady_clock::now();
                             brightnessBaseImg.convertTo(img, -1, alpha, beta);
+                            auto end = std::chrono::steady_clock::now();
+                            multiThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
+                            cv::setNumThreads(1);
+                            start = std::chrono::steady_clock::now();
+                            brightnessBaseImg.convertTo(singleCpuImg, -1, alpha, beta);
+                            end = std::chrono::steady_clock::now();
+                            singleThreadedCpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+                            cv::setNumThreads(TOTAL_THREADS);
+
+                            brightnessBaseImg.copyTo(gpuImg);
+                            start = std::chrono::steady_clock::now();
+                            gpuImg.convertTo(gpuImg, -1, alpha, beta);
+                            cv::ocl::finish();
+                            end = std::chrono::steady_clock::now();
+                            gpuTime = std::chrono::duration<double, std::milli>(end - start).count();
+
                             uploadTexture(img, texture);
                         }
                         ImGui::EndTabItem();
@@ -495,13 +518,13 @@ int main()
             );
 
             char singleThreadedCpuTimeText[32];
-            snprintf(singleThreadedCpuTimeText, sizeof(singleThreadedCpuTimeText), "%.2f ms", singleThreadedCpuTime);
+            snprintf(singleThreadedCpuTimeText, sizeof(singleThreadedCpuTimeText), "%.4f ms", singleThreadedCpuTime);
 
             char multiThreadedCpuTimeText[32];
-            snprintf(multiThreadedCpuTimeText, sizeof(multiThreadedCpuTimeText), "%.2f ms", multiThreadedCpuTime);
+            snprintf(multiThreadedCpuTimeText, sizeof(multiThreadedCpuTimeText), "%.4f ms", multiThreadedCpuTime);
 
             char gpuTimeText[32];
-            snprintf(gpuTimeText, sizeof(gpuTimeText), "%.2f ms", gpuTime);
+            snprintf(gpuTimeText, sizeof(gpuTimeText), "%.4f ms", gpuTime);
 
             const float metricsY = contentTop + contentMax.y - contentMin.y - statsHeight;
             const float metricsWidth = std::max(0.0f, available.x);
