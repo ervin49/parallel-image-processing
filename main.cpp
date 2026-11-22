@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <string>
 #include <vector>
 
 #include "backends/imgui_impl_glfw.h"
@@ -18,6 +19,7 @@ namespace
     cv::Mat multiThreadedCpuOriginalImg;
     double originalSingleThreadedCpuTime, originalMultiThreadedCpuTime, originalGpuTime, singleThreadedCpuTime,
            multiThreadedCpuTime, gpuTime;
+    std::string currentImagePath;
 }
 
 const int TOTAL_THREADS = cv::getNumThreads();
@@ -79,29 +81,52 @@ static void applyAdjustments(const Image& source, Image& result, int brightness,
         cv::bitwise_not(result, result);
 }
 
-static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightnessValue, int& contrastValue,
-                         int& saturationValue, int& warmthValue, bool& invertColors, GLuint& texture)
+static bool saveImage(const std::string& path, const cv::Mat& image)
 {
-    nfdu8char_t* outPath = nullptr;
+    try
+    {
+        cv::Mat encodedImage;
+        if (image.channels() == 3)
+            cv::cvtColor(image, encodedImage, cv::COLOR_RGB2BGR);
+        else if (image.channels() == 4)
+            cv::cvtColor(image, encodedImage, cv::COLOR_RGBA2BGRA);
+        else
+            encodedImage = image;
+
+        return cv::imwrite(path, encodedImage);
+    }
+    catch (const cv::Exception& error)
+    {
+        std::cerr << "Failed to save image: " << error.what() << '\n';
+        return false;
+    }
+}
+
+static void displayImage(cv::Mat& img, cv::Mat& brightnessBaseImg, int& brightnessValue, int& contrastValue,
+                         int& saturationValue, int& warmthValue, bool& invertColors, GLuint& texture,
+                         std::string& currentImagePath)
+{
+    nfdu8char_t* selectedPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
     nfdopendialogu8args_t args = {.filterList = nullptr};
     args.filterList = filters;
     args.filterCount = 1;
 
-    const nfdresult_t result = NFD_OpenDialogU8_With(&outPath, &args);
+    const nfdresult_t result = NFD_OpenDialogU8_With(&selectedPath, &args);
     if (result == NFD_OKAY)
     {
-        cv::Mat multiCpuLoaded = cv::imread(outPath), singleCpuLoaded;
+        cv::Mat multiCpuLoaded = cv::imread(selectedPath), singleCpuLoaded;
         cv::UMat gpuLoaded;
         multiCpuLoaded.copyTo(singleCpuLoaded);
         multiCpuLoaded.copyTo(gpuLoaded);
-        NFD_FreePathU8(outPath);
-
         if (multiCpuLoaded.empty())
         {
+            NFD_FreePathU8(selectedPath);
             std::cerr << "Failed to load image\n";
             return;
         }
+        currentImagePath = selectedPath;
+        NFD_FreePathU8(selectedPath);
 
         auto start = std::chrono::steady_clock::now();
         cv::cvtColor(multiCpuLoaded, multiCpuLoaded, cv::COLOR_BGR2RGB);
@@ -228,16 +253,42 @@ int main()
                 if (ImGui::MenuItem("Open", "Ctrl+O"))
                 {
                     displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, saturationValue,
-                                 warmthValue, invertColors, texture);
+                                 warmthValue, invertColors, texture, currentImagePath);
                 }
                 ImGui::BeginDisabled(img.empty());
                 if (ImGui::MenuItem("Save", "Ctrl+S"))
                 {
+                    if (currentImagePath.empty())
+                    {
+                        std::cerr << "No file path is set; use Save As first.\n";
+                    }
+                    else if (!saveImage(currentImagePath, img))
+                        std::cerr << "Failed to save image.\n";
                 }
                 ImGui::EndDisabled();
                 ImGui::BeginDisabled(img.empty());
-                if (ImGui::MenuItem("Export"))
+                if (ImGui::MenuItem("Save as..."))
                 {
+                    constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
+                    nfdsavedialogu8args_t args = {.filterList = nullptr};
+                    args.filterList = filters;
+                    args.filterCount = 1;
+
+                    nfdu8char_t* selectedPath = nullptr;
+                    const nfdresult_t result = NFD_SaveDialogU8_With(&selectedPath, &args);
+                    if (result == NFD_OKAY)
+                    {
+                        const std::string savePath = selectedPath;
+                        NFD_FreePathU8(selectedPath);
+                        if (saveImage(savePath, img))
+                            currentImagePath = savePath;
+                        else
+                            std::cerr << "Failed to save image.\n";
+                    }
+                    else if (result == NFD_ERROR)
+                    {
+                        std::cerr << "Save dialog error: " << NFD_GetError() << '\n';
+                    }
                 }
                 ImGui::EndDisabled();
                 if (ImGui::MenuItem("Exit"))
@@ -310,7 +361,7 @@ int main()
             if (ImGui::Button("Open Image"))
             {
                 displayImage(img, brightnessBaseImg, brightnessValue, contrastValue, saturationValue, warmthValue,
-                             invertColors, texture);
+                             invertColors, texture, currentImagePath);
             }
 
             ImGui::PopStyleVar(2);
