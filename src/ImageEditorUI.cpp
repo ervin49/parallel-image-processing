@@ -34,26 +34,16 @@ void ImageEditorUI::loadSidebarIcon()
         return;
 
     cv::Mat icon = cv::imread(iconPath, cv::IMREAD_UNCHANGED);
-    if (icon.empty())
-        return;
-
-    if (icon.channels() == 4)
-        cv::cvtColor(icon, icon, cv::COLOR_BGRA2RGBA);
-    else if (icon.channels() == 3)
-        cv::cvtColor(icon, icon, cv::COLOR_BGR2RGBA);
-    else if (icon.channels() == 1)
-        cv::cvtColor(icon, icon, cv::COLOR_GRAY2RGBA);
-    else
-        return;
+    cv::cvtColor(icon, icon, cv::COLOR_BGR2RGBA);
 
     ImageDisplayer::uploadTexture(icon, sidebarTexture);
 }
 
-void ImageEditorUI::openImage()
+void ImageEditorUI::openImage() const
 {
     nfdu8char_t* selectedPath = nullptr;
     constexpr nfdu8filteritem_t filters[1] = {{.name = "Images", .spec = "png,jpg,jpeg,bmp,tiff"}};
-    nfdopendialogu8args_t args = {.filterList = filters, .filterCount = 1};
+    const nfdopendialogu8args_t args = {.filterList = filters, .filterCount = 1};
     const nfdresult_t result = NFD_OpenDialogU8_With(&selectedPath, &args);
     if (result != NFD_OKAY)
     {
@@ -86,6 +76,11 @@ void ImageEditorUI::draw(const ImVec2& displaySize, ImFont* font, GLFWwindow* wi
         benchmark.run(source, operation, processedImage);
         image.setImage(processedImage);
     };
+    auto applyCurrentAdjustments = [&]()
+    {
+        processor.applyAdjustments(image.getProcessingBaseImage(), image.getImage(), state.brightness,
+                                   state.contrast, state.saturation, state.warmth, state.invertColors);
+    };
 
     ImGui::PushFont(font);
     ImGui::SetNextWindowSize(ImVec2(displaySize.x, displaySize.y));
@@ -104,11 +99,7 @@ void ImageEditorUI::draw(const ImVec2& displaySize, ImFont* font, GLFWwindow* wi
             ImGui::BeginDisabled(image.getImage().empty());
             if (ImGui::MenuItem("Save", "Ctrl+S"))
             {
-                if (image.getPath().empty())
-                {
-                    std::cerr << "No file path is set; use Save As first.\n";
-                }
-                else if (!image.save())
+                if (!image.save())
                     std::cerr << "Failed to save image.\n";
             }
             ImGui::EndDisabled();
@@ -186,7 +177,7 @@ void ImageEditorUI::draw(const ImVec2& displaySize, ImFont* font, GLFWwindow* wi
 
     if (image.getImage().empty())
     {
-        float fontHeight = ImGui::GetTextLineHeight();
+        const float fontHeight = ImGui::GetTextLineHeight();
         float fontSize = ImGui::CalcTextSize("No image loaded").x;
         ImGui::SetCursorPos(
             ImVec2(ImGui::GetWindowSize().x / 2 - fontSize / 2, ImGui::GetWindowSize().y / 2 - fontHeight * 1.5f));
@@ -246,71 +237,51 @@ void ImageEditorUI::draw(const ImVec2& displaySize, ImFont* font, GLFWwindow* wi
                     if (ImGui::MenuItem("Original"))
                     {
                         image.restoreOriginal();
+                        applyCurrentAdjustments();
                         benchmark.setLastResult(benchmark.getOriginalResult());
-                        state.brightness = 0;
-                        state.contrast = 0;
-                        state.saturation = 0;
-                        state.warmth = 0;
-                        state.invertColors = false;
                         ImageDisplayer::uploadTexture(image.getImage(), texture);
                     }
 
                     if (ImGui::MenuItem("Grayscale") && image.getImage().channels() >= 3)
                     {
-                        measureAndSetImage(image.getImage(), [this](const auto& source, auto& destination)
+                        measureAndSetImage(image.getProcessingBaseImage(), [this](const auto& source, auto& destination)
                         {
                             processor.toGrayscale(source, destination);
                         });
-                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                         image.setProcessingBaseImage(image.getImage());
-                        state.brightness = 0;
-                        state.contrast = 0;
-                        state.saturation = 0;
-                        state.warmth = 0;
-                        state.invertColors = false;
+                        applyCurrentAdjustments();
+                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                     }
                     if (ImGui::MenuItem("Gaussian Blur"))
                     {
-                        measureAndSetImage(image.getImage(), [this](const auto& source, auto& destination)
+                        measureAndSetImage(image.getProcessingBaseImage(), [this](const auto& source, auto& destination)
                         {
                             processor.gaussianBlur(source, destination);
                         });
-                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                         image.setProcessingBaseImage(image.getImage());
-                        state.brightness = 0;
-                        state.contrast = 0;
-                        state.saturation = 0;
-                        state.warmth = 0;
-                        state.invertColors = false;
+                        applyCurrentAdjustments();
+                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                     }
                     if (ImGui::MenuItem("Median Blur"))
                     {
-                        measureAndSetImage(image.getImage(), [this](const auto& source, auto& destination)
+                        measureAndSetImage(image.getProcessingBaseImage(), [this](const auto& source, auto& destination)
                         {
                             processor.medianBlur(source, destination);
                         });
-                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                         image.setProcessingBaseImage(image.getImage());
-                        state.brightness = 0;
-                        state.contrast = 0;
-                        state.saturation = 0;
-                        state.warmth = 0;
-                        state.invertColors = false;
+                        applyCurrentAdjustments();
+                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                     }
 
                     if (ImGui::MenuItem("Sharpening"))
                     {
-                        measureAndSetImage(image.getImage(), [this](const auto& source, auto& destination)
+                        measureAndSetImage(image.getProcessingBaseImage(), [this](const auto& source, auto& destination)
                         {
                             processor.sharpen(source, destination);
                         });
-                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                         image.setProcessingBaseImage(image.getImage());
-                        state.brightness = 0;
-                        state.contrast = 0;
-                        state.saturation = 0;
-                        state.warmth = 0;
-                        state.invertColors = false;
+                        applyCurrentAdjustments();
+                        ImageDisplayer::uploadTexture(image.getImage(), texture);
                     }
                     ImGui::PopStyleColor(2);
                     ImGui::EndTabItem();

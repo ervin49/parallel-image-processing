@@ -26,5 +26,5 @@ private:
     GLuint sidebarTexture = 0;
 
     void loadSidebarIcon();
-    void openImage();
+    void openImage() const;
 };
