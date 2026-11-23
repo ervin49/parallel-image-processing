@@ -2,6 +2,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(parallel_image_processing LANGUAGES CXX)
 
+include(CTest)
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -60,4 +62,20 @@ target_link_libraries(parallel_image_processing PRIVATE
     OpenGL::GL
     nfd
 )
+
+if(BUILD_TESTING)
+    add_executable(image_unit_tests
+        tests/ImageUnitTests.cpp
+        src/EditableImage.cpp
+        src/ImageProcessor.cpp
+    )
+
+    target_include_directories(image_unit_tests PRIVATE
+        ${OpenCV_INCLUDE_DIRS}
+        ${CMAKE_SOURCE_DIR}/src
+    )
+
+    target_link_libraries(image_unit_tests PRIVATE ${OpenCV_LIBS})
+    add_test(NAME image_unit_tests COMMAND image_unit_tests)
+endif()
 
